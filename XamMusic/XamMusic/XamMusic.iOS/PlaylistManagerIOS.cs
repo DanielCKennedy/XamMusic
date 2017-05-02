@@ -3,6 +3,7 @@ using Foundation;
 using MediaPlayer;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 using System.Threading.Tasks;
 using UIKit;
@@ -56,41 +57,45 @@ namespace XamMusic.iOS
             return null;
         }
 
-        public List<Song> GetAllSongs()
+        public async Task<IList<Song>> GetAllSongs()
         {
-            List<Song> songs = new List<Song>();
-
-            MPMediaQuery mq = new MPMediaQuery();
-            mq.GroupingType = MPMediaGrouping.Title;
-            var value = NSNumber.FromInt32((int)MPMediaType.Music);
-            var predicate = MPMediaPropertyPredicate.PredicateWithValue(value, MPMediaItem.MediaTypeProperty);
-            mq.AddFilterPredicate(predicate);
-            var items = mq.Items;
-
-            foreach (var item in items)
+            return await Task.Run<IList<Song>>(() =>
             {
-                if (item != null && !item.IsCloudItem && item.AssetURL != null)
-                {
-                    songs.Add(new Song
-                    {
-                        Id = item.PersistentID,
-                        Title = item.Title,
-                        Artist = item.Artist,
-                        Album = item.AlbumTitle,
-                        Genre = item.Genre,
-                        Artwork = item.Artwork,
-                        Duration = (ulong)item.PlaybackDuration * 1000,
-                        Uri = item.AssetURL.AbsoluteString
-                    });
-                }
-            }
+                IList<Song> songs = new ObservableCollection<Song>();
 
-            return songs;
+                MPMediaQuery mq = new MPMediaQuery();
+                mq.GroupingType = MPMediaGrouping.Title;
+                var value = NSNumber.FromInt32((int)MPMediaType.Music);
+                var predicate = MPMediaPropertyPredicate.PredicateWithValue(value, MPMediaItem.MediaTypeProperty);
+                mq.AddFilterPredicate(predicate);
+                var items = mq.Items;
+
+                foreach (var item in items)
+                {
+                    if (item != null && !item.IsCloudItem && item.AssetURL != null)
+                    {
+                        songs.Add(new Song
+                        {
+                            Id = item.PersistentID,
+                            Title = item.Title,
+                            Artist = item.Artist,
+                            Album = item.AlbumTitle,
+                            Genre = item.Genre,
+                            Artwork = item.Artwork,
+                            Duration = (ulong)item.PlaybackDuration * 1000,
+                            Uri = item.AssetURL.AbsoluteString
+                        });
+                    }
+                }
+
+                return songs;
+            });
+            
         }
 
         public IList<Playlist> GetPlaylists()
         {
-            List<Playlist> playlists = new List<Playlist>();
+            IList<Playlist> playlists = new ObservableCollection<Playlist>();
 
             MPMediaQuery mq = MPMediaQuery.PlaylistsQuery;
             MPMediaItemCollection[] playlistArray = mq.Collections;
@@ -107,35 +112,38 @@ namespace XamMusic.iOS
             return playlists;
         }
 
-        public IList<Song> GetPlaylistSongs(ulong playlistId)
+        public async Task<IList<Song>> GetPlaylistSongs(ulong playlistId)
         {
-            List<Song> songs = new List<Song>();
-
-            MPMediaQuery mq = MPMediaQuery.SongsQuery;
-            var value = NSNumber.FromUInt64(playlistId);
-            MPMediaPropertyPredicate predicate = MPMediaPropertyPredicate.PredicateWithValue(value, MPMediaPlaylistProperty.PersistentID);
-            mq.AddFilterPredicate(predicate);
-            var items = mq.Items;
-
-            foreach (var item in items)
+            return await Task.Run<IList<Song>>(() =>
             {
-                if (item != null && item.AssetURL != null)
-                {
-                    songs.Add(new Song
-                    {
-                        Id = item.PersistentID,
-                        Title = item.Title,
-                        Artist = item.Artist,
-                        Album = item.AlbumTitle,
-                        Genre = item.Genre,
-                        Artwork = item.Artwork,
-                        Duration = (ulong)item.PlaybackDuration * 1000,
-                        Uri = item.AssetURL.AbsoluteString
-                    });
-                }
-            }
+                IList<Song> songs = new ObservableCollection<Song>();
 
-            return songs;
+                MPMediaQuery mq = MPMediaQuery.SongsQuery;
+                var value = NSNumber.FromUInt64(playlistId);
+                MPMediaPropertyPredicate predicate = MPMediaPropertyPredicate.PredicateWithValue(value, MPMediaPlaylistProperty.PersistentID);
+                mq.AddFilterPredicate(predicate);
+                var items = mq.Items;
+
+                foreach (var item in items)
+                {
+                    if (item != null && item.AssetURL != null)
+                    {
+                        songs.Add(new Song
+                        {
+                            Id = item.PersistentID,
+                            Title = item.Title,
+                            Artist = item.Artist,
+                            Album = item.AlbumTitle,
+                            Genre = item.Genre,
+                            Artwork = item.Artwork,
+                            Duration = (ulong)item.PlaybackDuration * 1000,
+                            Uri = item.AssetURL.AbsoluteString
+                        });
+                    }
+                }
+
+                return songs;
+            });
         }
     }
 }

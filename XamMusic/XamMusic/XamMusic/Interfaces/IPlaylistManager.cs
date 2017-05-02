@@ -15,8 +15,8 @@ namespace XamMusic.Interfaces
 
         IList<Playlist> GetPlaylists();
 
-        IList<Song> GetPlaylistSongs(ulong playlistId); 
+        Task<IList<Song>> GetPlaylistSongs(ulong playlistId); 
 
-        List<Song> GetAllSongs();
+        Task<IList<Song>> GetAllSongs();
     }
 }

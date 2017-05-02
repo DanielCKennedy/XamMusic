@@ -12,7 +12,7 @@ namespace XamMusic.Models
 
         public string Title { get; set; }
 
-        public List<Song> Songs { get; set; }
+        public IList<Song> Songs { get; set; }
 
         public int Count { get; set; }
 

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace XamMusic.Models
 {
-    public class Song
+    public class Song //: IEqualityComparer<Song>
     {
         public ulong Id { get; set; }
 
@@ -21,11 +21,10 @@ namespace XamMusic.Models
 
         public object Artwork { get; set; }
 
-        public ulong Duration { get; set; }
+        public double Duration { get; set; }
 
         //public DateTime Date { get; set; }
 
         public string Uri { get; set; }
-
     }
 }

@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamMusic.Views.Page1">
+    <StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button x:Name="PrevButton" Command="{Binding PrevCommand}" Text="Prev"></Button>
+            <Button x:Name="PlayButton" Command="{Binding PlayCommand}" Text="Play"></Button>
+            <Button x:Name="PauseButton" Command="{Binding PauseCommand}" Text="Pause"></Button>
+            <Button x:Name="NextButton" Command="{Binding NextCommand}" Text="Next"></Button>
+        </StackLayout>
+        <StackLayout Orientation="Horizontal">
+            <Button x:Name="SetQueueButton" Command="{Binding SetQueueCommand}" Text="Set Queue"></Button>
+            <Button x:Name="ShuffleButton" Command="{Binding ShuffleCommand}" Text="Shuffle"></Button>
+        </StackLayout>
+        <Label x:Name="IsPlayingLabel" Text="{Binding IsPlayingText}"/>
+        <ProgressBar x:Name="ProgressBar" Progress="{Binding Progress}"/>
+        <Slider Value="{Binding Position, Mode=TwoWay}" Minimum="0" Maximum="{Binding SelectedSong.Duration}"/>
+        <ListView x:Name="QueueListView" ItemsSource="{Binding Queue}"
+                  SelectedItem="{Binding SelectedSong, Mode=TwoWay}">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Title}">
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+    
+</ContentPage>

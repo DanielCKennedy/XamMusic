@@ -99,10 +99,16 @@
       <HintPath>..\..\packages\Xamarin.Forms.2.3.3.180\lib\MonoAndroid10\Xamarin.Forms.Xaml.dll</HintPath>
       <Private>True</Private>
     </Reference>
-    <Reference Include="Xamarin.iOS, Version=0.0.0.0, Culture=neutral, PublicKeyToken=84e04ff9cfb79065" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Audio\AudioService.cs" />
+    <Compile Include="Audio\AudioServiceBinder.cs" />
+    <Compile Include="Audio\AudioServiceCallback.cs" />
+    <Compile Include="Audio\AudioServiceConnection.cs" />
+    <Compile Include="BroadcastRecievers\AudioControlsBroadcastReceiver.cs" />
+    <Compile Include="BroadcastRecievers\AudioNoisyBroadcastReceiver.cs" />
     <Compile Include="MainActivity.cs" />
+    <Compile Include="MusicManagerDroid.cs" />
     <Compile Include="PlaylistManagerDroid.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -119,7 +125,9 @@
     <AndroidResource Include="Resources\drawable-xxhdpi\icon.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Properties\AndroidManifest.xml" />
+    <None Include="Properties\AndroidManifest.xml">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Tabbar.axml" />
@@ -131,6 +139,9 @@
       <Project>{3e0425ae-5cf3-4c4a-8b02-de1122bf96c5}</Project>
       <Name>XamMusic</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Notifications\" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.3.180\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
