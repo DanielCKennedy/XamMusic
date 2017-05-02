@@ -96,6 +96,7 @@
     <None Include="Info.plist">
       <SubType>Designer</SubType>
     </None>
+    <Compile Include="MusicManagerIOS.cs" />
     <Compile Include="PlaylistManagerIOS.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <ITunesArtwork Include="iTunesArtwork" />

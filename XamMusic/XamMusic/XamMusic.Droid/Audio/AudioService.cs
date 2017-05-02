@@ -89,6 +89,18 @@ namespace XamMusic.Droid.Audio
             _player.SetOnSeekCompleteListener(this);
         }
 
+        public void Init(Action<bool> IsPlaying, Action<double> GetPosition, Action<int> GetQueuePos, Action<IList<Song>> GetQueue)
+        {
+            _isPlaying = IsPlaying;
+            _getPosition = GetPosition;
+            _getQueuePos = GetQueuePos;
+            _getQueue = GetQueue;
+
+            _isPlaying?.Invoke(_player != null && !_isPreparing ? _player.IsPlaying : false);
+            _getQueuePos?.Invoke(_pos);
+            _getQueue?.Invoke(_queue);
+        }
+
         public void SetQueue(IList<Song> songs)
         {
             if (songs == null)
@@ -99,7 +111,7 @@ namespace XamMusic.Droid.Audio
             if (!Enumerable.SequenceEqual(_queue, songs, _comparer))
             {
                 _queue = songs;
-                _getQueue(_queue);
+                _getQueue?.Invoke(_queue);
             }
         }
 
@@ -216,18 +228,6 @@ namespace XamMusic.Droid.Audio
             {
                 _player?.SeekTo((int)position * 1000);
             }
-        }
-
-        public void Init(Action<bool> IsPlaying, Action<double> GetPosition, Action<int> GetQueuePos, Action<IList<Song>> GetQueue)
-        {
-            _isPlaying = IsPlaying;
-            _getPosition = GetPosition;
-            _getQueuePos = GetQueuePos;
-            _getQueue = GetQueue;
-
-            _isPlaying?.Invoke(_player != null && !_isPreparing ? _player.IsPlaying : false);
-            _getQueuePos?.Invoke(_pos);
-            _getQueue?.Invoke(_queue);
         }
 
         private void InitializeMediaSession()

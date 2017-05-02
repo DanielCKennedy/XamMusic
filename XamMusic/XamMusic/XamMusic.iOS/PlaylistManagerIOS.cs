@@ -82,7 +82,7 @@ namespace XamMusic.iOS
                             Album = item.AlbumTitle,
                             Genre = item.Genre,
                             Artwork = item.Artwork,
-                            Duration = (ulong)item.PlaybackDuration * 1000,
+                            Duration = (ulong)item.PlaybackDuration,
                             Uri = item.AssetURL.AbsoluteString
                         });
                     }
@@ -136,7 +136,7 @@ namespace XamMusic.iOS
                             Album = item.AlbumTitle,
                             Genre = item.Genre,
                             Artwork = item.Artwork,
-                            Duration = (ulong)item.PlaybackDuration * 1000,
+                            Duration = (ulong)item.PlaybackDuration,
                             Uri = item.AssetURL.AbsoluteString
                         });
                     }
