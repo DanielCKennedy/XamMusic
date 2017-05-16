@@ -24,63 +24,56 @@ namespace XamMusic.ViewModels
                 return _instance;
             }
         }
-
-        public Command SetQueueCommand { get; private set; }
-        //public Command InitCommand { get; private set; }
+        
         public Command PlayCommand { get; private set; }
         public Command PauseCommand { get; private set; }
         public Command NextCommand { get; private set; }
         public Command PrevCommand { get; private set; }
         public Command ShuffleCommand { get; private set; }
-        public Command ArtworkCommand { get; private set; }
+        public Command ToggleCommand { get; private set; }
 
         private MusicStateViewModel()
         {
-            //InitCommand = new Command(() =>
-            //    DependencyService.Get<IMusicManager>().Init(
-            //        isPlaying =>
-            //        {
-            //            IsPlaying = isPlaying;
-            //        },
-            //        getPosition =>
-            //        {
-            //            Position = getPosition;
-            //        },
-            //        getQueuePos =>
-            //        {
-            //            QueuePos = getQueuePos;
-            //        },
-            //        getQueue =>
-            //        {
-            //            Queue = getQueue;
-            //        }));
-
-            SetQueueCommand = new Command(async() => {
-                DependencyService.Get<IMusicManager>().Init(
-                    isPlaying =>
-                    {
-                        IsPlaying = isPlaying;
-                    },
-                    getPosition =>
-                    {
-                        ActualPosition = getPosition;
-                    },
-                    getQueuePos =>
-                    {
-                        QueuePos = getQueuePos;
-                    },
-                    getQueue =>
-                    {
-                        Queue = getQueue;
-                    });
+            DependencyService.Get<IMusicManager>().Init(
+                        isPlaying =>
+                        {
+                            IsPlaying = isPlaying;
+                        },
+                        getPosition =>
+                        {
+                            ActualPosition = getPosition;
+                        },
+                        getQueuePos =>
+                        {
+                            QueuePos = getQueuePos;
+                        },
+                        getQueue =>
+                        {
+                            Queue = getQueue;
+                        });
+            Task.Run(async () =>
+            {
+                var songs = await DependencyService.Get<IPlaylistManager>().GetAllSongs();
                 DependencyService.Get<IMusicManager>().SetQueue(
-                    await DependencyService.Get<IPlaylistManager>().GetAllSongs());
-                    });
+                    songs);
+            });
+            
             PlayCommand = new Command(() => DependencyService.Get<IMusicManager>().Play());
             PauseCommand = new Command(() => DependencyService.Get<IMusicManager>().Pause());
             NextCommand = new Command(() => DependencyService.Get<IMusicManager>().Next());
             PrevCommand = new Command(() => DependencyService.Get<IMusicManager>().Prev());
             ShuffleCommand = new Command( () => DependencyService.Get<IMusicManager>().Shuffle());
+            ToggleCommand = new Command(() =>
+            {
+                if (IsPlaying)
+                {
+                    DependencyService.Get<IMusicManager>().Pause();
+                }
+                else
+                {
+                    DependencyService.Get<IMusicManager>().Play();
+                }
+            });
         }
 
         
@@ -94,6 +87,7 @@ namespace XamMusic.ViewModels
         }
 
 
+        public bool IsNotPlaying { get { return !_isPlaying; }}
         private bool _isPlaying;
 
         public bool IsPlaying
@@ -106,6 +100,7 @@ namespace XamMusic.ViewModels
                     _isPlaying = value;
                     OnPropertyChanged(nameof(IsPlaying));
                     OnPropertyChanged(nameof(IsPlayingText));
+                    OnPropertyChanged(nameof(IsNotPlaying));
                 }
             }
         }

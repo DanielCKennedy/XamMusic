@@ -13,10 +13,25 @@ namespace XamMusic.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class Page1 : ContentPage
     {
-        public Page1()
+        private static ContentPage _instance;
+        public static ContentPage Instance
+        {
+            get
+            {
+                if (_instance == null)
+                {
+                    _instance = new Page1();
+                }
+                return _instance;
+            }
+        }
+
+        private Page1()
         {
             BindingContext = MusicStateViewModel.Instance;
             InitializeComponent();
+
+            
         }
     }
 }

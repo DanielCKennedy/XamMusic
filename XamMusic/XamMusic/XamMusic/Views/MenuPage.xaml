@@ -1,0 +1,52 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamMusic.Views.MenuPage"
+             Title="Menu">
+    <StackLayout>
+        <ListView x:Name="ListViewMenuItems"
+              SeparatorVisibility="None"
+              HasUnevenRows="true"
+              ItemsSource="{Binding PlaylistItems}">
+            <ListView.Header>
+                <Grid BackgroundColor="#03A9F4">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="10"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="10"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="30"/>
+                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="10"/>
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.Column="1"
+                        Grid.Row="2"
+                        Text="Xam Music"
+                        Style="{DynamicResource SubtitleStyle}"/>
+                </Grid>
+            </ListView.Header>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout Padding="15,10" Orientation="Horizontal" HorizontalOptions="FillAndExpand">
+                            <Label
+                                HorizontalOptions="StartAndExpand"
+                                VerticalOptions="FillAndExpand" 
+                                VerticalTextAlignment="Center" 
+                                Text="{Binding Playlist.Title}" 
+                                FontSize="24"/>
+                            <Button VerticalOptions="End" HorizontalOptions="End" BackgroundColor="Aqua" Text="+" IsVisible="{Binding IsDynamic}"
+                                    Command="{Binding AddSong}"/>
+                        </StackLayout>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+            <ListView.Footer>
+                <Button VerticalOptions="Center" HorizontalOptions="Start" BackgroundColor="Green" Text="+"/>
+            </ListView.Footer>
+        </ListView>
+    </StackLayout>
+</ContentPage>

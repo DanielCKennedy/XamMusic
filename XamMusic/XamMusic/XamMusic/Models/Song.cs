@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace XamMusic.Models
 {
-    public class Song //: IEqualityComparer<Song>
+    public class Song
     {
         public ulong Id { get; set; }
 

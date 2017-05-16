@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView 
+    xmlns="http://xamarin.com/schemas/2014/forms" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+    xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
+    xmlns:local="clr-namespace:XamMusic.Controls;assembly=XamMusic"
+    x:Class="XamMusic.Controls.MusicBarControl"
+    x:Name="MusicBar" Margin="0,0,0,0" Padding="0,0,0,0">
+    <ContentView.Content>
+        <Grid Margin="0,0,0,0" Padding="0,0,0,0" ColumnSpacing="0" RowSpacing="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            
+            <cv:CarouselView x:Name="Carousel" Grid.Row="1" ItemsSource="{Binding Queue}" Margin="0,0,0,0" Position="{Binding QueuePos, Mode=TwoWay}">
+                <cv:CarouselView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="Black" Margin="0,0,0,0" Padding="0,0,0,0" ColumnSpacing="6" RowSpacing="0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="4"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <ProgressBar Grid.Row="0" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" Progress="{Binding Progress}" Margin="0,0,0,0" Grid.ColumnSpan="3"/>
+                            <local:ArtworkImage Grid.Row="1" Grid.Column="0" x:Name="ArtworkImage" Margin="6,0,0,0" Artwork="{Binding Artwork}"/>
+                            <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="0,0,0,0" Padding="0,0,0,0" Spacing="0" HorizontalOptions="Start" VerticalOptions="Center">
+                                <Label Text="{Binding Title}" Margin="0,0,0,0" Font="16" FontAttributes="Bold" LineBreakMode="MiddleTruncation"  HorizontalOptions="Start" TextColor="White"/>
+                                <Label Text="{Binding Artist}" LineBreakMode="MiddleTruncation" Margin="0,0,0,0"  HorizontalOptions="Start" TextColor="White"/>
+                            </StackLayout>
+                            <Button Grid.Row="1" Grid.Column="2" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" Command="{Binding PlayCommand}" IsVisible="{Binding IsNotPlaying}" BackgroundColor="Lime" HeightRequest="40" WidthRequest="40"/>
+                            <Button Grid.Row="1" Grid.Column="2" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" Command="{Binding PauseCommand}" IsVisible="{Binding IsPlaying}" BackgroundColor="Red" HeightRequest="40" WidthRequest="40"/>
+                        </Grid>
+                    </DataTemplate>
+                </cv:CarouselView.ItemTemplate>
+            </cv:CarouselView>
+        </Grid>
+    </ContentView.Content>
+</ContentView>

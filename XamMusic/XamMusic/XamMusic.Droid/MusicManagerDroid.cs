@@ -26,12 +26,20 @@ namespace XamMusic.Droid
 
         public void Init(Action<bool> IsPlaying, Action<double> GetSongPos, Action<int> GetQueuePos, Action<IList<Song>> GetQueue)
         {
-            if (MainActivity.Binder != null)
+            Task.Run(() =>
             {
-                _audioService = MainActivity.Binder.GetAudioService();
-                _audioService.Init(IsPlaying, GetSongPos, GetQueuePos, GetQueue);
-                _isConnected = true;
-            }
+                while (MainActivity.Binder == null)
+                {
+                    System.Threading.Thread.Sleep(100);
+                }
+                if (MainActivity.Binder != null)
+                {
+                    _audioService = MainActivity.Binder.GetAudioService();
+                    _audioService.Init(IsPlaying, GetSongPos, GetQueuePos, GetQueue);
+                    _isConnected = true;
+                }
+            });
+            
         }
 
         public async void Next()
@@ -93,6 +101,10 @@ namespace XamMusic.Droid
         {
             await Task.Run(() =>
             {
+                while (!_isConnected)
+                {
+                    System.Threading.Thread.Sleep(100);
+                }
                 if (_isConnected)
                 {
                     _audioService?.SetQueue(songs);
@@ -128,6 +140,8 @@ namespace XamMusic.Droid
         {
             await Task.Run(() =>
             {
+                
+                
                 if (_isConnected)
                 {
                     _audioService?.Start(pos);

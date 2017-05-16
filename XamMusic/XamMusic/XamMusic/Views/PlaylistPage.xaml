@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XamMusic.Controls;assembly=XamMusic"
+             x:Class="XamMusic.Views.PlaylistPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Queue" Clicked="ToolbarItem_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <StackLayout>
+        <ListView x:Name="playlistListView" ItemsSource="{Binding Songs}"
+                  ItemTapped="playlistListView_ItemTapped">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding Title}" Detail="{Binding Artist}">
+                    </TextCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+        <controls:MusicBarControl Grid.Row="1" x:Name="MusicBarController" HeightRequest="80" VerticalOptions="End"/>
+    </StackLayout>
+</ContentPage>
