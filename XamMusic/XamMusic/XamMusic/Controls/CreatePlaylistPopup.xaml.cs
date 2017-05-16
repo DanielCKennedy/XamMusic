@@ -23,14 +23,27 @@ namespace XamMusic.Controls
 
         private async void CreatePlaylist(object sender, EventArgs e)
         {
+            string title;
             if (String.IsNullOrWhiteSpace(PlaylistNameEntry.Text))
             {
-                DependencyService.Get<IPlaylistManager>().CreatePlaylist("Untitled Playlist");
+                title = "Untitled Playlist";
             }
             else
             {
-                DependencyService.Get<IPlaylistManager>().CreatePlaylist(PlaylistNameEntry.Text);
+                title = PlaylistNameEntry.Text;
             }
+
+            if (MenuViewModel.Instance.PlaylistItems.Where(r => r.Playlist?.Title == title).Count() > 0)
+            {
+                int i = 1;
+                while (MenuViewModel.Instance.PlaylistItems.Where(q => q.Playlist?.Title == $"{title}{i}").Count() > 0)
+                {
+                    i++;
+                }
+                title = $"{title}{i}";
+            }
+
+            DependencyService.Get<IPlaylistManager>().CreatePlaylist(title);
             MenuViewModel.Instance.Refresh();
             await Navigation.PopAllPopupAsync(true);
         }
