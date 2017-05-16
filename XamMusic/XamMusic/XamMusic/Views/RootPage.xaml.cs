@@ -23,11 +23,19 @@ namespace XamMusic.Views
                 PlaylistItem item = e.SelectedItem as PlaylistItem;
                 if (item != null)
                 {
-                    PlaylistPage page = new PlaylistPage(item);
-                    Detail = new NavigationPage(page);
+                    // To display the Home page since it isn't a PlaylistPage
+                    if (!item.IsDynamic && item.Playlist.Title == "Home")
+                    {
+                        Detail = new NavigationPage(Page1.Instance);
+                    }
+                    else
+                    {
+                        PlaylistPage page = new PlaylistPage(item);
+                        Detail = new NavigationPage(page);
+                    }
+                    
                     IsPresented = false;
                 }
-                
             };
         }
     }

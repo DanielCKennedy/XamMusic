@@ -45,7 +45,8 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.Footer>
-                <Button VerticalOptions="Center" HorizontalOptions="Start" BackgroundColor="Green" Text="+"/>
+                <Button VerticalOptions="Center" HorizontalOptions="Start" BackgroundColor="Green" Text="+"
+                        Clicked="Button_Clicked"/>
             </ListView.Footer>
         </ListView>
     </StackLayout>

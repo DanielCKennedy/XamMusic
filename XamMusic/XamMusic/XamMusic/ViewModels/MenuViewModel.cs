@@ -28,15 +28,7 @@ namespace XamMusic.ViewModels
         
         private MenuViewModel()
         {
-            PlaylistItems = new ObservableCollection<PlaylistItem>();
-            PlaylistItems.Add(new PlaylistItem(
-                new Playlist { Title = "All Songs" },
-                false));
-            var playlists = DependencyService.Get<IPlaylistManager>().GetPlaylists();
-            foreach (var playlist in playlists)
-            {
-                PlaylistItems.Add(new PlaylistItem(playlist, true));
-            }
+            Refresh();
         }
 
         private IList<PlaylistItem> _playlistItems;
@@ -48,6 +40,22 @@ namespace XamMusic.ViewModels
             {
                 _playlistItems = value;
                 OnPropertyChanged(nameof(PlaylistItems));
+            }
+        }
+
+        public void Refresh()
+        {
+            PlaylistItems = new ObservableCollection<PlaylistItem>();
+            PlaylistItems.Add(new PlaylistItem(
+                new Playlist { Title = "Home" },
+                false));
+            PlaylistItems.Add(new PlaylistItem(
+                new Playlist { Title = "All Songs" },
+                false));
+            var playlists = DependencyService.Get<IPlaylistManager>().GetPlaylists();
+            foreach (var playlist in playlists)
+            {
+                PlaylistItems.Add(new PlaylistItem(playlist, true));
             }
         }
     }
