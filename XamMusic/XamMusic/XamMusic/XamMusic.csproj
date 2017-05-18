@@ -43,6 +43,9 @@
     <Compile Include="Controls\MusicBarControl.xaml.cs">
       <DependentUpon>MusicBarControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\NowPlayingPopup.xaml.cs">
+      <DependentUpon>NowPlayingPopup.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\QueuePopup.xaml.cs">
       <DependentUpon>QueuePopup.xaml</DependentUpon>
     </Compile>
@@ -140,6 +143,12 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\QueuePopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\NowPlayingPopup.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

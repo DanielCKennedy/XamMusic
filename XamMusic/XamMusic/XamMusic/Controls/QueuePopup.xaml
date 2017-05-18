@@ -16,7 +16,7 @@
                   SelectedItem="{Binding SelectedSong, Mode=TwoWay}" VerticalOptions="FillAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Title}" Detail="{Binding SelectedSong.Artist}" />
+                    <TextCell Text="{Binding Title}" Detail="{Binding Artist}"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
