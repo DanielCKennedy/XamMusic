@@ -8,16 +8,31 @@
                  BackgroundColor="#F0000000"
                  CloseWhenBackgroundIsClicked="False"
                  HasSystemPadding="True">
-    <StackLayout Orientation="Vertical" Padding="10, 5" Spacing="6">
-        <StackLayout Orientation="Vertical" Spacing="3" VerticalOptions="Start">
-            <Label Text="{Binding SelectedSong.Title}" VerticalOptions="Start" HorizontalOptions="Start" TextColor="Red" FontAttributes="Bold"
+    <ScrollView>
+        <StackLayout Orientation="Vertical" Padding="10, 5" Spacing="6">
+            <StackLayout Orientation="Vertical" Spacing="3" VerticalOptions="Start">
+                <Label Text="{Binding SelectedSong.Title}" VerticalOptions="Start" HorizontalOptions="Start" TextColor="Red" FontAttributes="Bold"
                Margin="0, 10, 0, 0"/>
-            <Label Text="{Binding SelectedSong.Artist}" HorizontalOptions="Start" TextColor="Red" FontAttributes="Bold" VerticalOptions="Fill"/>
-        </StackLayout>
-        
-        <controls:ArtworkImage Artwork="{Binding SelectedSong.Artwork}" VerticalOptions="FillAndExpand" HorizontalOptions="Center"
+                <Label Text="{Binding SelectedSong.Artist}" HorizontalOptions="Start" TextColor="Red" FontAttributes="Bold" VerticalOptions="Fill"/>
+            </StackLayout>
+
+            <OnPlatform x:TypeArguments="View">
+                <OnPlatform.Android>
+                    <controls:ArtworkImage Artwork="{Binding SelectedSong.Artwork}" VerticalOptions="FillAndExpand" HorizontalOptions="Center"
                                HeightRequest="150" WidthRequest="150"/>
-        <Slider Value="{Binding Position, Mode=TwoWay}" Minimum="0" Maximum="{Binding SelectedSong.Duration}"/>
-        <Button BackgroundColor="Red" TextColor="Black" Text="X" VerticalOptions="End" Clicked="ClosePopup" HorizontalOptions="Center"/>
-    </StackLayout>
+                </OnPlatform.Android>
+                <OnPlatform.iOS>
+                    <Button Text="Toggle" TextColor="Red" BackgroundColor="White" WidthRequest="100" HeightRequest="50" Command="{Binding ToggleCommand}"
+                            VerticalOptions="FillAndExpand" HorizontalOptions="Center"/>
+                </OnPlatform.iOS>
+            </OnPlatform>
+            <!--<StackLayout Orientation="Horizontal">
+                <Label Text="{Binding Position}" BackgroundColor="Red" HorizontalOptions="Start" VerticalOptions="End" />
+                <Label Text="{Binding SelectedSong.Duration}" BackgroundColor="Red" HorizontalOptions="End" VerticalOptions="End" />
+            </StackLayout>-->
+            <Slider Value="{Binding Position, Mode=TwoWay}" Minimum="0" Maximum="{Binding SelectedSong.Duration}"/>
+            <Button BackgroundColor="Red" TextColor="Black" Text="X" VerticalOptions="End" Clicked="ClosePopup" HorizontalOptions="Center"/>
+        </StackLayout>
+    </ScrollView>
+    
 </pages:PopupPage>

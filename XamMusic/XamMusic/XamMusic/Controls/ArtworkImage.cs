@@ -29,6 +29,8 @@ namespace XamMusic.Controls
             switch(propertyName)
             {
                 case "Artwork":
+                    System.Diagnostics.Debug.WriteLine("Artwork Changed Started");
+                    System.Diagnostics.Debug.WriteLine("Artwork = " + Artwork);
                     if (!string.IsNullOrEmpty(Artwork?.ToString()))
                     {
                         if (Device.RuntimePlatform == Device.iOS)
@@ -43,12 +45,14 @@ namespace XamMusic.Controls
                     }
                     else
                     {
+                        System.Diagnostics.Debug.WriteLine("Null");
                         //if (Device.OS == TargetPlatform.iOS)
                         //{
                         //    Source = ImageSource.FromResource
                         //}
                         Source = null;
                     }
+                    System.Diagnostics.Debug.WriteLine("Artwork Finished");
                     break;
             }
         }

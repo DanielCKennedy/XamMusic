@@ -4,6 +4,9 @@
              xmlns:controls="clr-namespace:XamMusic.Controls;assembly=XamMusic"
              x:Class="XamMusic.Views.Page1" Padding="0,0,0,0"
              Title="Xam Music">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Queue" Clicked="ToolbarItem_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
     <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

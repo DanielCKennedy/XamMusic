@@ -22,7 +22,6 @@ namespace XamMusic.Views
             _vm = new PlaylistViewModel(playlistItem);
             this.BindingContext = _vm;
             InitializeComponent();
-            
         }
 
         private void playlistListView_ItemTapped(object sender, ItemTappedEventArgs e)

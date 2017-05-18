@@ -324,6 +324,8 @@ namespace XamMusic.iOS
 
         public async void ClearQueue()
         {
+            System.Diagnostics.Debug.WriteLine("ClearQueue()");
+            Pause();
             await SetQueue(null);
             UpdateInfoCenter();
         }

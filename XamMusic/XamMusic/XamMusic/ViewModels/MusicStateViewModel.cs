@@ -151,6 +151,8 @@ namespace XamMusic.ViewModels
                 {
                     _selectedSong = Queue[_queuePos];
                 }
+                //OnPropertyChanged(nameof(DurationString));
+                //UpdateDurationString();
                 return _selectedSong;
             }
             set
@@ -160,6 +162,8 @@ namespace XamMusic.ViewModels
                     QueuePos = Queue.IndexOf(value);
                     DependencyService.Get<IMusicManager>().Start(_queuePos);
                 }
+                //OnPropertyChanged(nameof(DurationString));
+                //UpdateDurationString();
             }
         }
 
@@ -191,6 +195,7 @@ namespace XamMusic.ViewModels
                     _position = value;
                     OnPropertyChanged(nameof(Position));
                     OnPropertyChanged(nameof(Progress));
+                    //UpdatePositionString();
                     if (Math.Abs(_position - _actualPosition) > 1)
                     {
                         DependencyService.Get<IMusicManager>().Seek(value);
@@ -198,7 +203,7 @@ namespace XamMusic.ViewModels
                 }
             }
         }
-        
+
         public double Progress
         {
             get
@@ -209,6 +214,82 @@ namespace XamMusic.ViewModels
                 return ret;
             }
         }
+
+        private string _positionString;
+        public string PositionString
+        {
+            get
+            {
+                return _positionString;
+                //return Task.Run<String>(() =>
+                //{
+                //    String str, format = @"mm\:ss";
+                //    if (SelectedSong != null && SelectedSong.Duration >= 3600)
+                //        format = @"h\:mm\:ss";
+
+                //    if (_position < 0)
+                //        str = TimeSpan.FromSeconds(0).ToString(format);
+                //    str = TimeSpan.FromSeconds(_position).ToString(format);
+
+                //    return str;
+                //}).Result;
+                
+            }
+        }
+
+        private string _durationString;
+        public string DurationString
+        {
+            get
+            {
+                return _durationString;
+                //return Task.Run<String>(() =>
+                //{
+                //    String format = @"mm\:ss";
+                //    if (SelectedSong != null && SelectedSong.Duration >= 3600)
+                //        format = @"h\:mm\:ss";
+
+                //    if (SelectedSong == null || SelectedSong?.Duration < 0)
+                //        return TimeSpan.FromSeconds(0).ToString(format);
+                //    return TimeSpan.FromSeconds(SelectedSong.Duration).ToString(format);
+                //}).Result;
+            }
+        }
+
+        private void UpdatePositionString()
+        {
+            Task.Run(() =>
+            {
+                String str, format = @"mm\:ss";
+                if (SelectedSong != null && SelectedSong.Duration >= 3600)
+                    format = @"h\:mm\:ss";
+
+                if (_position < 0)
+                    str = TimeSpan.FromSeconds(0).ToString(format);
+                str = TimeSpan.FromSeconds(_position).ToString(format);
+
+                _positionString = str;
+                OnPropertyChanged(nameof(PositionString));
+            });
+        }
+
+        private void UpdateDurationString()
+        {
+            Task.Run(() =>
+            {
+                String str, format = @"mm\:ss";
+                if (SelectedSong != null && SelectedSong.Duration >= 3600)
+                    format = @"h\:mm\:ss";
+
+                if (SelectedSong == null || SelectedSong?.Duration < 0)
+                    str = TimeSpan.FromSeconds(0).ToString(format);
+                str = TimeSpan.FromSeconds(SelectedSong.Duration).ToString(format);
+
+                _durationString = str;
+                OnPropertyChanged(nameof(DurationString));
+            });
+        }
+
 
 
     }

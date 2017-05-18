@@ -20,23 +20,35 @@ namespace XamMusic.Controls
         {
             get
             {
+                System.Diagnostics.Debug.WriteLine("NowPlayingPopup.Instance");
                 if (_instance == null)
                 {
                     _instance = new NowPlayingPopup();
                 }
-                return _instance;
+                return _instance;//new NowPlayingPopup();//_instance;
             }
         }
 
         private NowPlayingPopup()
         {
+            System.Diagnostics.Debug.WriteLine("NowPlayingPopup()");
             this.BindingContext = MusicStateViewModel.Instance;
             InitializeComponent();
         }
 
         private async void ClosePopup(object sender, EventArgs e)
         {
-            await Navigation.PopAllPopupAsync(true);
+            //await Navigation.PopAllPopupAsync(true);
+            await Navigation.PopPopupAsync(true);
+            if (_instance == null)
+            {
+                System.Diagnostics.Debug.WriteLine("_instance is null");
+            }
+            else
+            {
+                System.Diagnostics.Debug.WriteLine("Not NULL");
+                System.Diagnostics.Debug.WriteLine(_instance);
+            }
         }
     }
 }
