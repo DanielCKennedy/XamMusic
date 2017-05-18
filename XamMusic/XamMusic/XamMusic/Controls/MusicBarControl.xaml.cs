@@ -13,8 +13,10 @@ namespace XamMusic.Controls
     {
         public MusicBarControl()
         {
-            this.BindingContext = MusicStateViewModel.Instance;
+            
             InitializeComponent();
+            this.BindingContext = MusicStateViewModel.Instance;
+            Carousel.Position = MusicStateViewModel.Instance.QueuePos;
         }
     }
 }

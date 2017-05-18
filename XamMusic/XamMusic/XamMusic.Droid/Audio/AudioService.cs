@@ -367,7 +367,7 @@ namespace XamMusic.Droid.Audio
         public void StopNotification()
         {
             NotificationManagerCompat notificationManager = NotificationManagerCompat.From(ApplicationContext);
-            notificationManager.CancelAll();
+            notificationManager?.CancelAll();
         }
 
         private void UpdateMediaMetadataCompat(MediaMetadataRetriever metaRetriever = null)
@@ -464,7 +464,7 @@ namespace XamMusic.Droid.Audio
             return StartCommandResult.Sticky;
         }
 
-        public async void Stop()
+        public async Task Stop()
         {
             await Task.Run(() =>
             {
@@ -478,7 +478,7 @@ namespace XamMusic.Droid.Audio
                 _player.Reset();
                 StopNotification();
                 StopForeground(true);
-                UnregisterMediaSessionCompat();
+                //UnregisterMediaSessionCompat();
             });
         }
         

@@ -25,13 +25,13 @@ namespace XamMusic.ViewModels
             Title = playlistItem.Playlist.Title;
             Task.Run(async () =>
             {
-                if (playlistItem.IsDynamic)
+                if (playlistItem.Playlist.Title == "All Songs" && !playlistItem.Playlist.IsDynamic)
                 {
-                    Songs = await DependencyService.Get<IPlaylistManager>().GetPlaylistSongs(playlistItem.Playlist.Id);
+                    Songs = await DependencyService.Get<IPlaylistManager>().GetAllSongs();
                 }
                 else
                 {
-                    Songs = await DependencyService.Get<IPlaylistManager>().GetAllSongs();
+                    Songs = await DependencyService.Get<IPlaylistManager>().GetPlaylistSongs(playlistItem.Playlist.Id);
                 }
             });
 

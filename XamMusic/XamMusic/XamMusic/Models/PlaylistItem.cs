@@ -13,15 +13,12 @@ namespace XamMusic.Models
     {
         public Playlist Playlist { get; set; }
 
-        public bool IsDynamic { get; set; }
-
         public Command AddSong { get; set; }
 
-        public PlaylistItem(Playlist playlist, bool isDynamic)
+        public PlaylistItem(Playlist playlist)
         {
             Playlist = playlist;
-            IsDynamic = isDynamic;
-            if (IsDynamic)
+            if (Playlist.IsDynamic)
             {
                 AddSong = new Command(() =>
                 {

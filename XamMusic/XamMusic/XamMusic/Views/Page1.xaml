@@ -2,7 +2,8 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:XamMusic.Controls;assembly=XamMusic"
-             x:Class="XamMusic.Views.Page1" Padding="0,0,0,0">
+             x:Class="XamMusic.Views.Page1" Padding="0,0,0,0"
+             Title="Xam Music">
     <Grid Margin="0,0,0,0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>

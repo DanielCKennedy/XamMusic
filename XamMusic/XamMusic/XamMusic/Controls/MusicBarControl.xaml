@@ -5,7 +5,7 @@
     xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
     xmlns:local="clr-namespace:XamMusic.Controls;assembly=XamMusic"
     x:Class="XamMusic.Controls.MusicBarControl"
-    x:Name="MusicBar" Margin="0,0,0,0" Padding="0,0,0,0">
+    x:Name="MusicBar" Margin="0,0,0,0" Padding="0,0,0,0" BackgroundColor="Black">
     <ContentView.Content>
         <Grid Margin="0,0,0,0" Padding="0,0,0,0" ColumnSpacing="0" RowSpacing="0">
             <Grid.RowDefinitions>

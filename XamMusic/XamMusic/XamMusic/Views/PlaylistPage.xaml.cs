@@ -8,6 +8,8 @@ using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamMusic.Models;
 using XamMusic.ViewModels;
+using Rg.Plugins.Popup.Extensions;
+using XamMusic.Controls;
 
 namespace XamMusic.Views
 {
@@ -31,8 +33,7 @@ namespace XamMusic.Views
 
         private void ToolbarItem_Clicked(object sender, EventArgs e)
         {
-            Page1.Instance.Navigation.PushAsync(this);
-
+            Navigation.PushPopupAsync(QueuePopup.Instance);
         }
     }
 }

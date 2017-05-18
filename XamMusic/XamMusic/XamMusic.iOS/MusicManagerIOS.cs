@@ -186,7 +186,7 @@ namespace XamMusic.iOS
             UpdateInfoCenter();
         }
 
-        public async void SetQueue(IList<Song> songs)
+        public async Task SetQueue(IList<Song> songs)
         {
             System.Diagnostics.Debug.WriteLine("SetQeueue()");
             await Task.Run(() =>
@@ -243,9 +243,19 @@ namespace XamMusic.iOS
             });
         }
 
+
+        bool isFirst = true;
         public void Start(int pos)
         {
             System.Diagnostics.Debug.WriteLine("Start()");
+
+            // workaround to fix song auto-playing when app launches
+            if (isFirst)
+            {
+                isFirst = false;
+                return;
+            }
+
             if (pos >= 0 && pos < _queue.Count)
             {
                 _pos = pos;
@@ -268,9 +278,10 @@ namespace XamMusic.iOS
             }
         }
 
-        public void StartQueue(IList<Song> songs, int pos)
+        public async void StartQueue(IList<Song> songs, int pos)
         {
-            SetQueue(songs);
+            System.Diagnostics.Debug.WriteLine("StartQueue()");
+            await SetQueue(songs);
             Start(pos);
         }
 
@@ -281,26 +292,40 @@ namespace XamMusic.iOS
 
         private void UpdateInfoCenter()
         {
-            var item = new MPNowPlayingInfo
+            if (_queue != null && _queue.Count > 0)
             {
-                Title = _queue[_pos].Title,
-                AlbumTitle = _queue[_pos].Album,
-                Artist = _queue[_pos].Artist,
-                Genre = _queue[_pos].Genre,
-                ElapsedPlaybackTime = _player.CurrentTime.Seconds,
-                PlaybackDuration = _queue[_pos].Duration,
-                PlaybackQueueIndex = _pos,
-                PlaybackQueueCount = _queue.Count,
-                PlaybackRate = _player.Rate
-            };
-            if (_queue[_pos].Artwork != null)
-            {
-                item.Artwork = (MPMediaItemArtwork)_queue[_pos].Artwork;
+                var item = new MPNowPlayingInfo
+                {
+                    Title = _queue[_pos].Title,
+                    AlbumTitle = _queue[_pos].Album,
+                    Artist = _queue[_pos].Artist,
+                    Genre = _queue[_pos].Genre,
+                    ElapsedPlaybackTime = _player.CurrentTime.Seconds,
+                    PlaybackDuration = _queue[_pos].Duration,
+                    PlaybackQueueIndex = _pos,
+                    PlaybackQueueCount = _queue.Count,
+                    PlaybackRate = _player.Rate
+                };
+                if (_queue[_pos].Artwork != null)
+                {
+                    item.Artwork = (MPMediaItemArtwork)_queue[_pos].Artwork;
+                }
+                MPNowPlayingInfoCenter.DefaultCenter.NowPlaying = item;
             }
-            MPNowPlayingInfoCenter.DefaultCenter.NowPlaying = item;
+            else
+            {
+                MPNowPlayingInfoCenter.DefaultCenter.NowPlaying = null;
+            }
+            
             InvokeOnMainThread(() => {
                 UIApplication.SharedApplication.BeginReceivingRemoteControlEvents();
             });
+        }
+
+        public async void ClearQueue()
+        {
+            await SetQueue(null);
+            UpdateInfoCenter();
         }
     }
 }

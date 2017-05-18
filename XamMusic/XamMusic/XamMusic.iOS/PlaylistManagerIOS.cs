@@ -51,7 +51,7 @@ namespace XamMusic.iOS
                 {
                     Id = playlist.PersistentID,
                     Title = playlist.Name,
-                    Count = 0
+                    IsDynamic = true
                 };
             }
             return null;
@@ -100,12 +100,14 @@ namespace XamMusic.iOS
             MPMediaQuery mq = MPMediaQuery.PlaylistsQuery;
             MPMediaItemCollection[] playlistArray = mq.Collections;
 
-            foreach (var playlist in playlistArray)
+            foreach (MPMediaPlaylist playlist in playlistArray)
             {
+                
                 playlists.Add(new Playlist
                 {
                     Id = ulong.Parse(playlist.ValueForProperty(MPMediaPlaylistProperty.PersistentID).ToString()),
-                    Title = playlist.ValueForProperty(MPMediaPlaylistProperty.Name).ToString()
+                    Title = playlist.ValueForProperty(MPMediaPlaylistProperty.Name).ToString(),
+                    IsDynamic = playlist.PlaylistAttributes == MPMediaPlaylistAttribute.None ? true : false
                 });
             }
 

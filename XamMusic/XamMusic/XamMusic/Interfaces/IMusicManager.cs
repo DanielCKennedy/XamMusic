@@ -11,7 +11,7 @@ namespace XamMusic.Interfaces
     {
         void Init(Action<bool> IsPlaying, Action<double> GetSongPos, Action<int> GetQueuePos, Action<IList<Song>> GetQueue);
 
-        void SetQueue(IList<Song> songs);
+        Task SetQueue(IList<Song> songs);
 
         void StartQueue(IList<Song> songs, int pos);
 
@@ -28,5 +28,7 @@ namespace XamMusic.Interfaces
         void Shuffle();
 
         void Seek(double position);
+
+        void ClearQueue();
     }
 }

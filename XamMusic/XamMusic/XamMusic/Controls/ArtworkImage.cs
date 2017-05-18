@@ -29,20 +29,24 @@ namespace XamMusic.Controls
             switch(propertyName)
             {
                 case "Artwork":
-                    if (!string.IsNullOrEmpty(Artwork.ToString()))
+                    if (!string.IsNullOrEmpty(Artwork?.ToString()))
                     {
-                        if (Device.OS == TargetPlatform.iOS)
+                        if (Device.RuntimePlatform == Device.iOS)
                         {
                             System.IO.Stream stream = ((MPMediaItemArtwork)Artwork).ImageWithSize(new CoreGraphics.CGSize(WidthRequest, HeightRequest)).AsPNG().AsStream();
                             Source = ImageSource.FromStream(() => stream);
                         }
-                        else if (Device.OS == TargetPlatform.Android)
+                        else if (Device.RuntimePlatform == Device.Android)
                         {
                             Source = ImageSource.FromFile(Artwork.ToString());
                         }
                     }
                     else
                     {
+                        //if (Device.OS == TargetPlatform.iOS)
+                        //{
+                        //    Source = ImageSource.FromResource
+                        //}
                         Source = null;
                     }
                     break;

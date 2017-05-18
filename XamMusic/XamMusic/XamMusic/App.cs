@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using XamMusic.Controls;
 using XamMusic.Interfaces;
 using XamMusic.Models;
 using XamMusic.ViewModels;
@@ -18,6 +19,7 @@ namespace XamMusic
         {
             // initialize MusicStateViewModel to load current playlist as app loads
             var vm = MusicStateViewModel.Instance;
+            var q = QueuePopup.Instance;
 
             MainPage = new RootPage();
         }

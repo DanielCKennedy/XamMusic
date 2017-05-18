@@ -80,7 +80,7 @@ namespace XamMusic.Droid
                 if (playlistCursor.MoveToFirst())
                 {
                     ulong id = ulong.Parse(playlistCursor.GetString(playlistCursor.GetColumnIndex(MediaStore.Audio.Playlists.InterfaceConsts.Id)));
-                    return new Playlist { Id = id, Title = name, Songs = new List<Song>() };
+                    return new Playlist { Id = id, Title = name, Songs = new List<Song>(), IsDynamic = true };
                 }
                 playlistCursor?.Close();
                 
@@ -200,7 +200,7 @@ namespace XamMusic.Droid
                 {
                     id = ulong.Parse(playlistCursor.GetString(idColumn));
                     name = playlistCursor.GetString(nameColumn);
-                    playlists.Add(new Playlist { Id = id, Title = name, Count = 0 });
+                    playlists.Add(new Playlist { Id = id, Title = name, IsDynamic = true });
                 } while (playlistCursor.MoveToNext());
             }
             playlistCursor?.Close();
@@ -312,7 +312,7 @@ namespace XamMusic.Droid
         public void AddToPlaylist(Playlist playlist, Song song)
         {
             ContentValues cv = new ContentValues();
-            cv.Put(MediaStore.Audio.Playlists.Members.PlayOrder, playlist.Count + 1);
+            cv.Put(MediaStore.Audio.Playlists.Members.PlayOrder, 0);
             cv.Put(MediaStore.Audio.Playlists.Members.AudioId, song.Id);
             Android.Net.Uri uri = MediaStore.Audio.Playlists.Members.GetContentUri("external", (long)playlist.Id);
             ContentResolver resolver = Android.App.Application.Context.ContentResolver;

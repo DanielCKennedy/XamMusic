@@ -47,15 +47,13 @@ namespace XamMusic.ViewModels
         {
             PlaylistItems = new ObservableCollection<PlaylistItem>();
             PlaylistItems.Add(new PlaylistItem(
-                new Playlist { Title = "Home" },
-                false));
+                new Playlist { Title = "Home", IsDynamic = false }));
             PlaylistItems.Add(new PlaylistItem(
-                new Playlist { Title = "All Songs" },
-                false));
+                new Playlist { Title = "All Songs", IsDynamic = false }));
             var playlists = DependencyService.Get<IPlaylistManager>().GetPlaylists();
             foreach (var playlist in playlists)
             {
-                PlaylistItems.Add(new PlaylistItem(playlist, true));
+                PlaylistItems.Add(new PlaylistItem(playlist));
             }
         }
     }

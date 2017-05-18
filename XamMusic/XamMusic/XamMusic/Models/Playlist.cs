@@ -14,7 +14,7 @@ namespace XamMusic.Models
 
         public IList<Song> Songs { get; set; }
 
-        public int Count { get; set; }
+        public bool IsDynamic { get; set; }
 
     }
 }

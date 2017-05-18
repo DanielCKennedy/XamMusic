@@ -15,6 +15,8 @@ using Xamarin.Forms;
 using XamMusic.Models;
 using System.Threading.Tasks;
 using XamMusic.Droid.Audio;
+using System.Collections.ObjectModel;
+using System.Threading;
 
 [assembly: Dependency(typeof(MusicManagerDroid))]
 namespace XamMusic.Droid
@@ -97,7 +99,7 @@ namespace XamMusic.Droid
             });
         }
 
-        public async void SetQueue(IList<Song> songs)
+        public async Task SetQueue(IList<Song> songs)
         {
             await Task.Run(() =>
             {
@@ -140,11 +142,28 @@ namespace XamMusic.Droid
         {
             await Task.Run(() =>
             {
-                
-                
                 if (_isConnected)
                 {
                     _audioService?.Start(pos);
+                }
+            });
+        }
+
+        public async void ClearQueue()
+        {
+            await Task.Run(async () =>
+            {
+                if (_isConnected)
+                {
+                    await _audioService?.Stop();
+                    Thread.Sleep(100);
+                    _audioService?.SetQueue(null);
+                    //await _audioService?.Stop();
+                    
+                    //await _audioService?.Stop();
+                    //_audioService?.StopNotification();
+
+                    //_audioService?.SetQueue(new ObservableCollection<Song>());
                 }
             });
         }

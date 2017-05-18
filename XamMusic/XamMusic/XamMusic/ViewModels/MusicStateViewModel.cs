@@ -31,6 +31,7 @@ namespace XamMusic.ViewModels
         public Command PrevCommand { get; private set; }
         public Command ShuffleCommand { get; private set; }
         public Command ToggleCommand { get; private set; }
+        public Command ClearQueueCommand { get; private set; }
 
         private MusicStateViewModel()
         {
@@ -54,7 +55,7 @@ namespace XamMusic.ViewModels
             Task.Run(async () =>
             {
                 var songs = await DependencyService.Get<IPlaylistManager>().GetAllSongs();
-                DependencyService.Get<IMusicManager>().SetQueue(
+                await DependencyService.Get<IMusicManager>().SetQueue(
                     songs);
             });
             
@@ -73,6 +74,10 @@ namespace XamMusic.ViewModels
                 {
                     DependencyService.Get<IMusicManager>().Play();
                 }
+            });
+            ClearQueueCommand = new Command(() =>
+            {
+                DependencyService.Get<IMusicManager>().ClearQueue();
             });
         }
 

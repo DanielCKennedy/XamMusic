@@ -38,7 +38,7 @@
                                 VerticalTextAlignment="Center" 
                                 Text="{Binding Playlist.Title}" 
                                 FontSize="24"/>
-                            <Button VerticalOptions="End" HorizontalOptions="End" BackgroundColor="Aqua" Text="+" IsVisible="{Binding IsDynamic}"
+                            <Button VerticalOptions="End" HorizontalOptions="End" BackgroundColor="Aqua" Text="+" IsVisible="{Binding Playlist.IsDynamic}"
                                     Command="{Binding AddSong}"/>
                         </StackLayout>
                     </ViewCell>

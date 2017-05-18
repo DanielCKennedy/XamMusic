@@ -24,7 +24,7 @@ namespace XamMusic.Views
                 if (item != null)
                 {
                     // To display the Home page since it isn't a PlaylistPage
-                    if (!item.IsDynamic && item.Playlist.Title == "Home")
+                    if (!item.Playlist.IsDynamic && item.Playlist.Title == "Home")
                     {
                         Detail = new NavigationPage(Page1.Instance);
                     }
