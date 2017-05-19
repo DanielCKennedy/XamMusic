@@ -15,7 +15,7 @@ namespace XamMusic.Views
     {
         public RootPage()
         {
-            Detail = new NavigationPage(Page1.Instance);
+            Detail = new NavigationPage(new HomePage());
             InitializeComponent();
 
             MenuPage.PlaylistList.ItemSelected += (s, e) =>
@@ -26,7 +26,7 @@ namespace XamMusic.Views
                     // To display the Home page since it isn't a PlaylistPage
                     if (!item.Playlist.IsDynamic && item.Playlist.Title == "Home")
                     {
-                        Detail = new NavigationPage(Page1.Instance);
+                        Detail = new NavigationPage(new HomePage());
                     }
                     else
                     {

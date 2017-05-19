@@ -47,6 +47,7 @@ namespace XamMusic.Droid.Audio
         private IList<Song> _queue;
         private int _pos;
         private bool _isPreparing = false;
+        private bool _isSeeking = false;
         private bool _startOnPrepared = true;
         private bool _playing = false;
 
@@ -142,6 +143,38 @@ namespace XamMusic.Droid.Audio
             }
         }
 
+        public void AddToEndOfQueue(IList<Song> songs)
+        {
+            if (_queue == null || _queue.Count == 0)
+            {
+                SetQueue(songs);
+            }
+            else
+            {
+                foreach (Song song in songs)
+                {
+                    _queue.Add(song);
+                }
+                _getQueue?.Invoke(_queue);
+            }
+        }
+
+        public void PlayNext(Song song)
+        {
+            if (_queue == null || _queue.Count == 0)
+            {
+                var songs = new ObservableCollection<Song>();
+                songs.Add(song);
+                SetQueue(songs);
+                Start(0);
+            }
+            else
+            {
+                _queue.Insert(_pos + 1, song);
+                _getQueue?.Invoke(_queue);
+            }
+        }
+
         public void Play()
         {
             System.Diagnostics.Debug.WriteLine("Play()");
@@ -157,6 +190,7 @@ namespace XamMusic.Droid.Audio
                     _playing = true;
                     while (_playing && !_isPreparing)
                     {
+                        double sPos = _player.CurrentPosition / 1000;
                         _getPosition(_player.CurrentPosition / 1000);
                         Thread.Sleep(250);
                     }

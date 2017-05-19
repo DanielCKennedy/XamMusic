@@ -189,16 +189,18 @@ namespace XamMusic.ViewModels
             get { return _position; }
             set
             {
-                if (_position != value && _position < _queue[_queuePos].Duration)
+                if (_position != value && value < _queue[_queuePos].Duration)
                 {
                     double temp = _position;
-                    _position = value;
+                    double val = value;
+                    if (_position > _queue[_queuePos].Duration)
+                        val = 0;
+                    _position = val;
                     OnPropertyChanged(nameof(Position));
                     OnPropertyChanged(nameof(Progress));
-                    //UpdatePositionString();
-                    if (Math.Abs(_position - _actualPosition) > 1)
+                    if (Math.Abs(_position - _actualPosition) > 1 && temp <= _queue[_queuePos].Duration)
                     {
-                        DependencyService.Get<IMusicManager>().Seek(value);
+                        DependencyService.Get<IMusicManager>().Seek(val);
                     }
                 }
             }

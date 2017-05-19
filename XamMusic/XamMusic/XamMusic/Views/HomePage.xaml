@@ -1,0 +1,20 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:XamMusic.Controls;assembly=XamMusic"
+             x:Class="XamMusic.Views.HomePage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Queue" Clicked="ToolbarItem_Clicked"></ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            
+            <controls:MusicBarControl Grid.Row="1" x:Name="MusicBarController" HeightRequest="80" VerticalOptions="End"/>
+        </Grid>
+    </ContentPage.Content>
+</ContentPage>

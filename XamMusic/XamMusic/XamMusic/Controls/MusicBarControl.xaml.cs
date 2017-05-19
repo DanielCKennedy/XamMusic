@@ -22,7 +22,7 @@ namespace XamMusic.Controls
 
         private void OpenNowPlayingPopup(object sender, EventArgs e)
         {
-            Navigation.PushPopupAsync(NowPlayingPopup.Instance);
+            Navigation.PushPopupAsync(new NowPlayingPopup());
         }
     }
 }

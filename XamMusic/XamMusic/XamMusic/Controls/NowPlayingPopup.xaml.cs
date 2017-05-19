@@ -15,40 +15,19 @@ namespace XamMusic.Controls
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class NowPlayingPopup : PopupPage
     {
-        private static NowPlayingPopup _instance;
-        public static NowPlayingPopup Instance
-        {
-            get
-            {
-                System.Diagnostics.Debug.WriteLine("NowPlayingPopup.Instance");
-                if (_instance == null)
-                {
-                    _instance = new NowPlayingPopup();
-                }
-                return _instance;//new NowPlayingPopup();//_instance;
-            }
-        }
-
-        private NowPlayingPopup()
+        public NowPlayingPopup()
         {
             System.Diagnostics.Debug.WriteLine("NowPlayingPopup()");
             this.BindingContext = MusicStateViewModel.Instance;
             InitializeComponent();
+
+            // Workaround to avoid song restarting on create in iOS
+            SliderStackLayout.Children.Add(SliderControl.Instance);
         }
 
         private async void ClosePopup(object sender, EventArgs e)
         {
-            //await Navigation.PopAllPopupAsync(true);
             await Navigation.PopPopupAsync(true);
-            if (_instance == null)
-            {
-                System.Diagnostics.Debug.WriteLine("_instance is null");
-            }
-            else
-            {
-                System.Diagnostics.Debug.WriteLine("Not NULL");
-                System.Diagnostics.Debug.WriteLine(_instance);
-            }
         }
     }
 }

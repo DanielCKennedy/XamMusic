@@ -15,8 +15,26 @@
                Margin="0, 10, 0, 0"/>
                 <Label Text="{Binding SelectedSong.Artist}" HorizontalOptions="Start" TextColor="Red" FontAttributes="Bold" VerticalOptions="Fill"/>
             </StackLayout>
+            <Grid VerticalOptions="FillAndExpand">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="3*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
 
-            <OnPlatform x:TypeArguments="View">
+                <controls:ArtworkImage Grid.Column="1" Artwork="{Binding SelectedSong.Artwork}" HorizontalOptions="Center"
+                               HeightRequest="200" WidthRequest="200"/>
+                <Button BackgroundColor="Transparent" Grid.Column="0" Command="{Binding PrevCommand}" VerticalOptions="FillAndExpand"/>
+                <Button BackgroundColor="Transparent" Grid.Column="1" Command="{Binding ToggleCommand}" VerticalOptions="FillAndExpand"/>
+                <Button BackgroundColor="Transparent" Grid.Column="2" Command="{Binding NextCommand}" VerticalOptions="FillAndExpand"/>
+
+            </Grid>
+
+            
+            <!--<OnPlatform x:TypeArguments="View">
                 <OnPlatform.Android>
                     <controls:ArtworkImage Artwork="{Binding SelectedSong.Artwork}" VerticalOptions="FillAndExpand" HorizontalOptions="Center"
                                HeightRequest="150" WidthRequest="150"/>
@@ -25,12 +43,12 @@
                     <Button Text="Toggle" TextColor="Red" BackgroundColor="White" WidthRequest="100" HeightRequest="50" Command="{Binding ToggleCommand}"
                             VerticalOptions="FillAndExpand" HorizontalOptions="Center"/>
                 </OnPlatform.iOS>
-            </OnPlatform>
+            </OnPlatform>-->
             <!--<StackLayout Orientation="Horizontal">
                 <Label Text="{Binding Position}" BackgroundColor="Red" HorizontalOptions="Start" VerticalOptions="End" />
                 <Label Text="{Binding SelectedSong.Duration}" BackgroundColor="Red" HorizontalOptions="End" VerticalOptions="End" />
             </StackLayout>-->
-            <Slider Value="{Binding Position, Mode=TwoWay}" Minimum="0" Maximum="{Binding SelectedSong.Duration}"/>
+            <StackLayout x:Name="SliderStackLayout"/>
             <Button BackgroundColor="Red" TextColor="Black" Text="X" VerticalOptions="End" Clicked="ClosePopup" HorizontalOptions="Center"/>
         </StackLayout>
     </ScrollView>

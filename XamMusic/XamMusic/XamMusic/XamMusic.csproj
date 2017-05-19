@@ -49,6 +49,15 @@
     <Compile Include="Controls\QueuePopup.xaml.cs">
       <DependentUpon>QueuePopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\SliderControl.xaml.cs">
+      <DependentUpon>SliderControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SongOptionsPopup.xaml.cs">
+      <DependentUpon>SongOptionsPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SongViewCell.xaml.cs">
+      <DependentUpon>SongViewCell.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helpers\SongComparer.cs" />
     <Compile Include="Interfaces\IMusicManager.cs" />
     <Compile Include="Interfaces\IPlaylistManager.cs" />
@@ -60,6 +69,9 @@
     <Compile Include="ViewModels\MenuViewModel.cs" />
     <Compile Include="ViewModels\MusicStateViewModel.cs" />
     <Compile Include="ViewModels\PlaylistViewModel.cs" />
+    <Compile Include="Views\HomePage.xaml.cs">
+      <DependentUpon>HomePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
@@ -149,6 +161,30 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Controls\NowPlayingPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\SongViewCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\SongOptionsPopup.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Controls\SliderControl.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Views\HomePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

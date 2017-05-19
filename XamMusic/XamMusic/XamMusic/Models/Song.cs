@@ -26,5 +26,19 @@ namespace XamMusic.Models
         //public DateTime Date { get; set; }
 
         public string Uri { get; set; }
+
+        public Song() { }
+
+        public Song(Song song)
+        {
+            Id = song.Id;
+            Title = song.Title;
+            Artist = song.Artist;
+            Album = song.Album;
+            Genre = song.Genre;
+            Artwork = song.Artwork;
+            Duration = song.Duration;
+            Uri = song.Uri;
+        }
     }
 }

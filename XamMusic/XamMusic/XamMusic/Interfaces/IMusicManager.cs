@@ -30,5 +30,9 @@ namespace XamMusic.Interfaces
         void Seek(double position);
 
         void ClearQueue();
+
+        void AddToEndOfQueue(IList<Song> songs);
+
+        void PlayNext(Song song);
     }
 }

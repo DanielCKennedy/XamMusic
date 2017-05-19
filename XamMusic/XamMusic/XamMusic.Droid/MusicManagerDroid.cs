@@ -158,12 +158,28 @@ namespace XamMusic.Droid
                     await _audioService?.Stop();
                     Thread.Sleep(100);
                     _audioService?.SetQueue(null);
-                    //await _audioService?.Stop();
-                    
-                    //await _audioService?.Stop();
-                    //_audioService?.StopNotification();
+                }
+            });
+        }
 
-                    //_audioService?.SetQueue(new ObservableCollection<Song>());
+        public void AddToEndOfQueue(IList<Song> songs)
+        {
+            Task.Run(() =>
+            {
+                if (_isConnected)
+                {
+                    _audioService?.AddToEndOfQueue(songs);
+                }
+            });
+        }
+
+        public void PlayNext(Song song)
+        {
+            Task.Run(() =>
+            {
+                if (_isConnected)
+                {
+                    _audioService?.PlayNext(song);
                 }
             });
         }

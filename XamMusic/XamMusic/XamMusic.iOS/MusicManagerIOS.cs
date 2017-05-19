@@ -178,12 +178,20 @@ namespace XamMusic.iOS
         {
             System.Diagnostics.Debug.WriteLine("Seek()");
             bool isSongPlaying = _player?.Rate != 0 && _player.Error == null;
-            await _player?.SeekAsync(CMTime.FromSeconds(position, 4));
-            if (!isSongPlaying)
+            if (position < _player.CurrentItem.Duration.Seconds)
             {
-                Pause();
+                await _player?.SeekAsync(CMTime.FromSeconds(position, 4));
+                if (!isSongPlaying)
+                {
+                    Pause();
+                }
+                UpdateInfoCenter();
             }
-            UpdateInfoCenter();
+            else
+            {
+                Next();
+            }
+                
         }
 
         public async Task SetQueue(IList<Song> songs)
@@ -328,6 +336,38 @@ namespace XamMusic.iOS
             Pause();
             await SetQueue(null);
             UpdateInfoCenter();
+        }
+
+        public async void AddToEndOfQueue(IList<Song> songs)
+        {
+            if (_queue == null || _queue.Count == 0)
+            {
+                await SetQueue(songs);
+            }
+            else
+            {
+                foreach (Song song in songs)
+                {
+                    _queue.Add(song);
+                }
+                _getQueue?.Invoke(_queue);
+            }
+        }
+
+        public async void PlayNext(Song song)
+        {
+            if (_queue == null || _queue.Count == 0)
+            {
+                var songs = new ObservableCollection<Song>();
+                songs.Add(song);
+                await SetQueue(songs);
+                Start(0);
+            }
+            else
+            {
+                _queue.Insert(_pos + 1, song);
+                _getQueue?.Invoke(_queue);
+            }
         }
     }
 }

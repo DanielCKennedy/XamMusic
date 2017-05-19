@@ -3,20 +3,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:XamMusic.Controls;assembly=XamMusic"
              x:Class="XamMusic.Views.PlaylistPage"
+             x:Name="PlaylistPage"
              Title="{Binding Title}">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Queue" Clicked="ToolbarItem_Clicked"></ToolbarItem>
     </ContentPage.ToolbarItems>
-    <StackLayout>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <ActivityIndicator Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center"
+                           IsRunning="True" IsVisible="{Binding SongsLoading}" />
         <ListView x:Name="playlistListView" ItemsSource="{Binding Songs}"
-                  ItemTapped="playlistListView_ItemTapped">
+                  ItemTapped="playlistListView_ItemTapped"
+                  Grid.Row="0">
+            <ListView.Header>
+                <StackLayout Orientation="Horizontal">
+                    <Label BindingContext="{Binding Source={x:Reference PlaylistPage}, Path=BindingContext}"
+                           Text="{Binding CountText}" HorizontalOptions="StartAndExpand"
+                           FontAttributes="Bold" FontSize="Medium" HorizontalTextAlignment="Center"
+                           VerticalOptions="Center" VerticalTextAlignment="Center"
+                           Margin="10, 0, 0, 0"/>
+                    <Button Text="Shuffle" Clicked="Button_Clicked" />
+                    <Button Text="Add To Queue" Clicked="Button_Clicked_1" />
+                </StackLayout>
+            </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Title}" Detail="{Binding Artist}">
-                    </TextCell>
+                    <controls:SongViewCell />
+                    <!--<TextCell Text="{Binding Title}" Detail="{Binding Artist}">
+                    </TextCell>-->
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
         <controls:MusicBarControl Grid.Row="1" x:Name="MusicBarController" HeightRequest="80" VerticalOptions="End"/>
-    </StackLayout>
+    </Grid>
 </ContentPage>

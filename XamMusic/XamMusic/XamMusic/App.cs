@@ -20,7 +20,8 @@ namespace XamMusic
             // initialize MusicStateViewModel to load current playlist as app loads
             var vm = MusicStateViewModel.Instance;
             var q = QueuePopup.Instance;
-            var p = NowPlayingPopup.Instance;
+            var s = SliderControl.Instance;
+            //var p = NowPlayingPopup.Instance;
 
             MainPage = new RootPage();
         }

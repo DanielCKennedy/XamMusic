@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,8 +22,10 @@ namespace XamMusic.ViewModels
         public PlaylistViewModel(PlaylistItem playlistItem)
         {
             _comparer = new SongComparer();
-             
+
             Title = playlistItem.Playlist.Title;
+            SongsLoading = true;
+            OnPropertyChanged(nameof(SongsLoading));
             Task.Run(async () =>
             {
                 if (playlistItem.Playlist.Title == "All Songs" && !playlistItem.Playlist.IsDynamic)
@@ -33,11 +36,13 @@ namespace XamMusic.ViewModels
                 {
                     Songs = await DependencyService.Get<IPlaylistManager>().GetPlaylistSongs(playlistItem.Playlist.Id);
                 }
+                SongsLoading = false;
+                OnPropertyChanged(nameof(SongsLoading));
             });
 
             PlayCommand = new Command((item) =>
             {
-                DependencyService.Get<IMusicManager>().StartQueue(Songs, Songs.IndexOf(item as Song));
+                DependencyService.Get<IMusicManager>().StartQueue(new ObservableCollection<Song>(Songs), Songs.IndexOf(item as Song));
             });
         }
 
@@ -52,8 +57,19 @@ namespace XamMusic.ViewModels
             {
                 _songs = value;
                 OnPropertyChanged(nameof(Songs));
+                OnPropertyChanged(nameof(CountText));
             }
         }
+        
+        public string CountText
+        {
+            get
+            {
+                return _songs != null ? $"{_songs.Count} Songs" : "0 Songs";
+            }
+        }
+
+        public bool SongsLoading { get; set; }
 
     }
 }

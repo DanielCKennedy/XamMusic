@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ViewCell xmlns="http://xamarin.com/schemas/2014/forms"
+          xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+          x:Class="XamMusic.Controls.SongViewCell"
+          xmlns:controls="clr-namespace:XamMusic.Controls">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="40" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="30" />
+        </Grid.ColumnDefinitions>
+
+        <controls:ArtworkImage Artwork="{Binding Artwork}" Grid.Row="0" Grid.Column="0" HeightRequest="20" WidthRequest="20"/>
+        <StackLayout Orientation="Vertical" Grid.Column="1" Spacing="3" Padding="0, 3, 0, 3">
+            <Label Text="{Binding Title}" LineBreakMode="TailTruncation" FontAttributes="Bold"/>
+            <Label Text="{Binding Artist}" LineBreakMode="TailTruncation" />
+        </StackLayout>
+        
+        <Button BackgroundColor="Yellow" Grid.Column="2" Clicked="SongOptionsPopup"/>
+    </Grid>
+    
+</ViewCell>
