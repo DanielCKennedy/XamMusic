@@ -27,6 +27,14 @@ namespace XamMusic.Models
 
         public string Uri { get; set; }
 
+        public bool HasArtwork
+        {
+            get
+            {
+                return Artwork != null && !String.IsNullOrEmpty(Artwork.ToString());
+            }
+        }
+
         public Song() { }
 
         public Song(Song song)

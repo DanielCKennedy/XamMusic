@@ -47,10 +47,10 @@ namespace XamMusic.Views
             }
         }
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
             PlaylistViewModel vm = this.BindingContext as PlaylistViewModel;
-            DependencyService.Get<IMusicManager>().SetQueue(new ObservableCollection<Song>(
+            await DependencyService.Get<IMusicManager>().SetQueue(new ObservableCollection<Song>(
                 vm.Songs.Select(s => new Models.Song(s))));
             DependencyService.Get<IMusicManager>().Shuffle();
         }
