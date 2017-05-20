@@ -1,4 +1,5 @@
-﻿using MediaPlayer;
+﻿using FFImageLoading.Forms;
+using MediaPlayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ using Xamarin.Forms;
 
 namespace XamMusic.Controls
 {
-    public class ArtworkImage : Image
+    public class ArtworkImage : CachedImage
     {
         public static readonly BindableProperty ArtworkProperty = BindableProperty.Create<ArtworkImage, object>(p => p.Artwork, false);
 

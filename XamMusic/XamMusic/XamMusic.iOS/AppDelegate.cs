@@ -4,6 +4,7 @@ using System.Linq;
 
 using Foundation;
 using UIKit;
+using FFImageLoading.Forms.Touch;
 
 namespace XamMusic.iOS
 {
@@ -24,6 +25,9 @@ namespace XamMusic.iOS
         {
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
+
+            // FFImageLoading
+            CachedImageRenderer.Init();
 
             return base.FinishedLaunching(app, options);
         }

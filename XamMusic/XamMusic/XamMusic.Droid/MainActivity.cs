@@ -8,6 +8,7 @@ using Android.Widget;
 using Android.OS;
 using Android.Content;
 using XamMusic.Droid.Audio;
+using FFImageLoading.Forms.Droid;
 
 namespace XamMusic.Droid
 {
@@ -28,6 +29,9 @@ namespace XamMusic.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
+
+            // FFImageLoading
+            CachedImageRenderer.Init();
 
             Instance = this;
             AudioServiceIntent = new Intent(Droid.Audio.AudioService.ActionStart);
