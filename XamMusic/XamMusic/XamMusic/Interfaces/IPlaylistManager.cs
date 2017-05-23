@@ -9,7 +9,7 @@ namespace XamMusic.Interfaces
 {
     public interface IPlaylistManager
     {
-        void AddToPlaylist(Playlist playlist, Song song);
+        Task AddToPlaylist(Playlist playlist, Song song);
 
         Playlist CreatePlaylist(string name);
 

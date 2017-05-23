@@ -22,9 +22,21 @@ namespace XamMusic.Models
             {
                 AddSong = new Command(() =>
                 {
-                    DependencyService.Get<IPlaylistManager>().AddToPlaylist(
-                        Playlist,
-                        MusicStateViewModel.Instance.SelectedSong);
+                    Task.Run(async () =>
+                    {
+                        await DependencyService.Get<IPlaylistManager>().AddToPlaylist(
+                            Playlist,
+                            MusicStateViewModel.Instance.SelectedSong);
+                        playlist.Songs = await DependencyService.Get<IPlaylistManager>().GetPlaylistSongs(
+                            playlist.Id);
+                        //System.Diagnostics.Debug.WriteLine("Instance = " + PlaylistViewModel.Instance);
+                        if (PlaylistViewModel.Instance != null)
+                        {
+                            PlaylistViewModel.Instance.Songs = playlist.Songs;
+                        }
+                    });
+                    
+                    
                 });
             }
         }

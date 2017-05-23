@@ -17,28 +17,31 @@ namespace XamMusic.iOS
 {
     public class PlaylistManagerIOS : IPlaylistManager
     {
-        public void AddToPlaylist(Playlist playlist, Song song)
+        public async Task AddToPlaylist(Playlist playlist, Song song)
         {
-            MPMediaQuery mq = MPMediaQuery.PlaylistsQuery;
-            MPMediaItemCollection[] playlistArray = mq.Collections;
-
-            foreach (MPMediaPlaylist pl in playlistArray)
+            await Task.Run(() =>
             {
-                if (pl.PersistentID == playlist.Id)
+                MPMediaQuery mq = MPMediaQuery.PlaylistsQuery;
+                MPMediaItemCollection[] playlistArray = mq.Collections;
+
+                foreach (MPMediaPlaylist pl in playlistArray)
                 {
-                    MPMediaQuery m = MPMediaQuery.SongsQuery;
-                    var p = MPMediaPropertyPredicate.PredicateWithValue(NSNumber.FromUInt64(song.Id), MPMediaItem.PersistentIDProperty);
-                    m.AddFilterPredicate(p);
-                    if (m.Items.Length > 0)
+                    if (pl.PersistentID == playlist.Id)
                     {
-                        pl.AddMediaItems(m.Items, (err) =>
+                        MPMediaQuery m = MPMediaQuery.SongsQuery;
+                        var p = MPMediaPropertyPredicate.PredicateWithValue(NSNumber.FromUInt64(song.Id), MPMediaItem.PersistentIDProperty);
+                        m.AddFilterPredicate(p);
+                        if (m.Items.Length > 0)
                         {
-                            if (err != null)
-                                err.ToString();
-                        });
+                            pl.AddMediaItems(m.Items, (err) =>
+                            {
+                                if (err != null)
+                                    err.ToString();
+                            });
+                        }
                     }
                 }
-            }
+            });
         }
 
         public Playlist CreatePlaylist(string name)

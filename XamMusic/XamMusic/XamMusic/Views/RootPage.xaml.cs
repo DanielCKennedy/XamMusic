@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamMusic.Models;
+using XamMusic.ViewModels;
 
 namespace XamMusic.Views
 {
@@ -26,6 +27,7 @@ namespace XamMusic.Views
                     // To display the Home page since it isn't a PlaylistPage
                     if (!item.Playlist.IsDynamic && item.Playlist.Title == "Home")
                     {
+                        PlaylistViewModel.Instance = null;
                         Detail = new NavigationPage(new HomePage());
                     }
                     else

@@ -309,15 +309,19 @@ namespace XamMusic.Droid
             
         }
 
-        public void AddToPlaylist(Playlist playlist, Song song)
+        public async Task AddToPlaylist(Playlist playlist, Song song)
         {
-            ContentValues cv = new ContentValues();
-            cv.Put(MediaStore.Audio.Playlists.Members.PlayOrder, 0);
-            cv.Put(MediaStore.Audio.Playlists.Members.AudioId, song.Id);
-            Android.Net.Uri uri = MediaStore.Audio.Playlists.Members.GetContentUri("external", (long)playlist.Id);
-            ContentResolver resolver = Android.App.Application.Context.ContentResolver;
-            var rUri = resolver.Insert(uri, cv);
-            resolver.NotifyChange(Android.Net.Uri.Parse("content://media"), null);
+            await Task.Run(() =>
+            {
+                ContentValues cv = new ContentValues();
+                cv.Put(MediaStore.Audio.Playlists.Members.PlayOrder, 0);
+                cv.Put(MediaStore.Audio.Playlists.Members.AudioId, song.Id);
+                Android.Net.Uri uri = MediaStore.Audio.Playlists.Members.GetContentUri("external", (long)playlist.Id);
+                ContentResolver resolver = Android.App.Application.Context.ContentResolver;
+                var rUri = resolver.Insert(uri, cv);
+                resolver.NotifyChange(Android.Net.Uri.Parse("content://media"), null);
+            });
+            
         }
     }
 }
