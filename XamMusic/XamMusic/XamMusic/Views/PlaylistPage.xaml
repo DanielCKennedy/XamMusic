@@ -38,6 +38,6 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <controls:MusicBarControl Grid.Row="1" x:Name="MusicBarController" HeightRequest="80" VerticalOptions="End"/>
+        <controls:MusicBarControl Grid.Row="1" x:Name="MusicBarController" HeightRequest="65" VerticalOptions="End"/>
     </Grid>
 </ContentPage>

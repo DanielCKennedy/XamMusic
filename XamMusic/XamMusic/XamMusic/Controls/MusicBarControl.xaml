@@ -8,12 +8,12 @@
     x:Name="MusicBar" Margin="0,0,0,0" Padding="0,0,0,0" BackgroundColor="Black">
     <ContentView.Content>
         <Grid Margin="0,0,0,0" Padding="0,0,0,0" ColumnSpacing="0" RowSpacing="0">
-            <Grid.RowDefinitions>
+            <!--<Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
+            </Grid.RowDefinitions>-->
             
-            <cv:CarouselView x:Name="Carousel" Grid.Row="1" ItemsSource="{Binding Queue}" Margin="0,0,0,0" Position="{Binding QueuePos, Mode=TwoWay}">
+            <cv:CarouselView x:Name="Carousel" ItemsSource="{Binding Queue}" Margin="0,0,0,0" Position="{Binding QueuePos, Mode=TwoWay}">
                 <cv:CarouselView.ItemTemplate>
                     <DataTemplate>
                         <Grid BackgroundColor="Black" Margin="0,0,0,0" Padding="0,0,0,0" ColumnSpacing="6" RowSpacing="0">
@@ -26,16 +26,25 @@
                                 <ColumnDefinition Width="Auto"/>
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="4" />
                             </Grid.ColumnDefinitions>
-                            <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" Clicked="OpenNowPlayingPopup" BackgroundColor="Transparent" BorderColor="Transparent" BorderWidth="0" />
-                            <ProgressBar Grid.Row="0" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" Progress="{Binding Progress}" Margin="0,0,0,0" Grid.ColumnSpan="3"/>
-                            <local:ArtworkImage Grid.Row="1" Grid.Column="0" x:Name="ArtworkImage" Margin="6,0,0,0" Artwork="{Binding Artwork}" IsVisible="{Binding HasArtwork}"/>
+                            <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4" Clicked="OpenNowPlayingPopup" BackgroundColor="Transparent" BorderColor="Transparent" BorderWidth="0" />
+                            <ProgressBar Grid.Row="0" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" Progress="{Binding Progress}" Margin="0,0,0,0" Grid.ColumnSpan="4"/>
+                            <local:ArtworkImage Grid.Row="1" Grid.Column="0" x:Name="ArtworkImage" Margin="6,0,0,0" Artwork="{Binding Artwork}" IsVisible="{Binding HasArtwork}" HeightRequest="45" WidthRequest="45"/>
                             <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="0,0,0,0" Padding="0,0,0,0" Spacing="0" HorizontalOptions="Start" VerticalOptions="Center">
-                                <Label Text="{Binding Title}" Margin="0,0,0,0" Font="16" FontAttributes="Bold" LineBreakMode="MiddleTruncation"  HorizontalOptions="Start" TextColor="White"/>
-                                <Label Text="{Binding Artist}" LineBreakMode="MiddleTruncation" Margin="0,0,0,0"  HorizontalOptions="Start" TextColor="White"/>
+                                <Label Text="{Binding Title}" Margin="0,0,0,0" Font="16" FontAttributes="Bold" LineBreakMode="TailTruncation"  HorizontalOptions="Start" TextColor="White"/>
+                                <Label Text="{Binding Artist}" LineBreakMode="TailTruncation"  Margin="0,0,0,0"  HorizontalOptions="Start" TextColor="LightGray"/>
                             </StackLayout>
-                            <Button Grid.Row="1" Grid.Column="2" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" Command="{Binding PlayCommand}" IsVisible="{Binding IsNotPlaying}" BackgroundColor="Lime" HeightRequest="40" WidthRequest="40"/>
-                            <Button Grid.Row="1" Grid.Column="2" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" Command="{Binding PauseCommand}" IsVisible="{Binding IsPlaying}" BackgroundColor="Red" HeightRequest="40" WidthRequest="40"/>
+                            <Image Source="play_w.png" Grid.Row="1" Grid.Column="2" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" IsVisible="{Binding IsNotPlaying}" HeightRequest="40" WidthRequest="40">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PlayCommand}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <Image Source="pause_w.png" Grid.Row="1" Grid.Column="2" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" IsVisible="{Binding IsPlaying}" HeightRequest="40" WidthRequest="40">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding PauseCommand}" />
+                                </Image.GestureRecognizers>
+                            </Image>
                         </Grid>
                     </DataTemplate>
                 </cv:CarouselView.ItemTemplate>
