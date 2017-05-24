@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
     xmlns:local="clr-namespace:XamMusic.Controls;assembly=XamMusic"
+    xmlns:effects="clr-namespace:XamMusic.Effects"
     x:Class="XamMusic.Controls.MusicBarControl"
     x:Name="MusicBar" Margin="0,0,0,0" Padding="0,0,0,0" BackgroundColor="Black">
     <ContentView.Content>
@@ -29,7 +30,11 @@
                                 <ColumnDefinition Width="4" />
                             </Grid.ColumnDefinitions>
                             <Button Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="4" Clicked="OpenNowPlayingPopup" BackgroundColor="Transparent" BorderColor="Transparent" BorderWidth="0" />
-                            <ProgressBar Grid.Row="0" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" Progress="{Binding Progress}" Margin="0,0,0,0" Grid.ColumnSpan="4"/>
+                            <ProgressBar Grid.Row="0" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" Progress="{Binding Progress}" Margin="0,0,0,0" Grid.ColumnSpan="4">
+                                <ProgressBar.Effects>
+                                    <effects:BlueProgressBarEffect />
+                                </ProgressBar.Effects>
+                            </ProgressBar>
                             <local:ArtworkImage Grid.Row="1" Grid.Column="0" x:Name="ArtworkImage" Margin="6,0,0,0" Artwork="{Binding Artwork}" IsVisible="{Binding HasArtwork}" HeightRequest="45" WidthRequest="45"/>
                             <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="0,0,0,0" Padding="0,0,0,0" Spacing="0" HorizontalOptions="Start" VerticalOptions="Center">
                                 <Label Text="{Binding Title}" Margin="0,0,0,0" Font="16" FontAttributes="Bold" LineBreakMode="TailTruncation"  HorizontalOptions="Start" TextColor="White"/>

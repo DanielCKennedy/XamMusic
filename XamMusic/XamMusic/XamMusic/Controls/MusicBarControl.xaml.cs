@@ -14,7 +14,6 @@ namespace XamMusic.Controls
     {
         public MusicBarControl()
         {
-            
             InitializeComponent();
             this.BindingContext = MusicStateViewModel.Instance;
             Carousel.Position = MusicStateViewModel.Instance.QueuePos;

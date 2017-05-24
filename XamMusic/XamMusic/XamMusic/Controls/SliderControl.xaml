@@ -1,8 +1,13 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="XamMusic.Controls.SliderControl">
+             x:Class="XamMusic.Controls.SliderControl"
+             xmlns:effects="clr-namespace:XamMusic.Effects">
     <ContentView.Content>
-        <Slider Value="{Binding Position, Mode=TwoWay}" Minimum="0" Maximum="{Binding SelectedSong.Duration}"/>
+        <Slider x:Name="slider" Value="{Binding Position, Mode=TwoWay}" Minimum="0" Maximum="{Binding SelectedSong.Duration}">
+            <Slider.Effects>
+                <effects:BlueSliderEffect />
+            </Slider.Effects>
+        </Slider>
   </ContentView.Content>
 </ContentView>

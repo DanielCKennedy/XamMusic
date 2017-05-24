@@ -145,6 +145,8 @@
     <Compile Include="Audio\AudioServiceBinder.cs" />
     <Compile Include="Audio\AudioServiceCallback.cs" />
     <Compile Include="Audio\AudioServiceConnection.cs" />
+    <Compile Include="Effects\BlueProgressBarEffect.cs" />
+    <Compile Include="Effects\BlueSliderEffect.cs" />
     <Compile Include="BroadcastRecievers\AudioControlsBroadcastReceiver.cs" />
     <Compile Include="BroadcastRecievers\AudioNoisyBroadcastReceiver.cs" />
     <Compile Include="MainActivity.cs" />

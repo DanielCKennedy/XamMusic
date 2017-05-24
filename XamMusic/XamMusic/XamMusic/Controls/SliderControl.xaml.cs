@@ -28,7 +28,9 @@ namespace XamMusic.Controls
         public SliderControl()
         {
             this.BindingContext = MusicStateViewModel.Instance;
+            
             InitializeComponent();
+
         }
     }
 }
