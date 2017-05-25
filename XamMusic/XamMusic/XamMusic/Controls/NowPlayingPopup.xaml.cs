@@ -45,9 +45,9 @@ namespace XamMusic.Controls
 
         private async void ClosePopup(object sender, EventArgs e)
         {
+            ((Image)sender).Opacity = 0.6;
             await Navigation.PopPopupAsync(true);
         }
 
-        
     }
 }

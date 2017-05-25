@@ -6,6 +6,7 @@
       <StackLayout>
             <Image Source="next.png" HeightRequest="40" WidthRequest="40">
                 <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                     <TapGestureRecognizer Command="{Binding NextCommand}" />
                 </Image.GestureRecognizers>
             </Image>

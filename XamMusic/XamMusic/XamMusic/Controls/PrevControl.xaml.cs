@@ -18,5 +18,11 @@ namespace XamMusic.Controls
             this.BindingContext = MusicStateViewModel.Instance;
             InitializeComponent();
         }
+
+        private void TapGestureRecognizer_Tapped(object sender, EventArgs e)
+        {
+            ((Image)sender).Opacity = 0.6;
+            ((Image)sender).FadeTo(1, 150);
+        }
     }
 }

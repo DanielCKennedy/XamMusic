@@ -6,11 +6,13 @@
       <StackLayout>
             <Image Source="play_w.png" IsVisible="{Binding IsNotPlaying}" HeightRequest="40" WidthRequest="40">
                 <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                     <TapGestureRecognizer Command="{Binding PlayCommand}" />
                 </Image.GestureRecognizers>
             </Image>
             <Image Source="pause_w.png" IsVisible="{Binding IsPlaying}" HeightRequest="40" WidthRequest="40">
                 <Image.GestureRecognizers>
+                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                     <TapGestureRecognizer Command="{Binding PauseCommand}" />
                 </Image.GestureRecognizers>
             </Image>
