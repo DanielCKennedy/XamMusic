@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="XamMusic.Controls.PrevControl">
+  <ContentView.Content>
+      <StackLayout>
+            <Image Source="prev.png" HeightRequest="40" WidthRequest="40">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding PrevCommand}" />
+                </Image.GestureRecognizers>
+            </Image>
+        </StackLayout>
+  </ContentView.Content>
+</ContentView>

@@ -81,17 +81,6 @@ namespace XamMusic.ViewModels
             });
         }
 
-        
-
-        public string IsPlayingText
-        {
-            get
-            {
-                return (_isPlaying ? "Playing..." : "Paused...");
-            }
-        }
-
-
         public bool IsNotPlaying { get { return !_isPlaying; }}
         private bool _isPlaying;
 
@@ -104,7 +93,6 @@ namespace XamMusic.ViewModels
                 {
                     _isPlaying = value;
                     OnPropertyChanged(nameof(IsPlaying));
-                    OnPropertyChanged(nameof(IsPlayingText));
                     OnPropertyChanged(nameof(IsNotPlaying));
                 }
             }
@@ -151,8 +139,6 @@ namespace XamMusic.ViewModels
                 {
                     _selectedSong = Queue[_queuePos];
                 }
-                //OnPropertyChanged(nameof(DurationString));
-                //UpdateDurationString();
                 return _selectedSong;
             }
             set
@@ -161,9 +147,8 @@ namespace XamMusic.ViewModels
                 {
                     QueuePos = Queue.IndexOf(value);
                     DependencyService.Get<IMusicManager>().Start(_queuePos);
+                    OnPropertyChanged(nameof(DurationString));
                 }
-                //OnPropertyChanged(nameof(DurationString));
-                //UpdateDurationString();
             }
         }
 
@@ -198,6 +183,7 @@ namespace XamMusic.ViewModels
                     _position = val;
                     OnPropertyChanged(nameof(Position));
                     OnPropertyChanged(nameof(Progress));
+                    OnPropertyChanged(nameof(PositionString));
                     if (Math.Abs(_position - _actualPosition) > 1 && temp <= _queue[_queuePos].Duration)
                     {
                         DependencyService.Get<IMusicManager>().Seek(val);
@@ -217,82 +203,45 @@ namespace XamMusic.ViewModels
             }
         }
 
-        private string _positionString;
         public string PositionString
         {
             get
             {
-                return _positionString;
-                //return Task.Run<String>(() =>
-                //{
-                //    String str, format = @"mm\:ss";
-                //    if (SelectedSong != null && SelectedSong.Duration >= 3600)
-                //        format = @"h\:mm\:ss";
-
-                //    if (_position < 0)
-                //        str = TimeSpan.FromSeconds(0).ToString(format);
-                //    str = TimeSpan.FromSeconds(_position).ToString(format);
-
-                //    return str;
-                //}).Result;
-                
+                return Timify(_position);                
             }
         }
 
-        private string _durationString;
         public string DurationString
         {
             get
             {
-                return _durationString;
-                //return Task.Run<String>(() =>
-                //{
-                //    String format = @"mm\:ss";
-                //    if (SelectedSong != null && SelectedSong.Duration >= 3600)
-                //        format = @"h\:mm\:ss";
-
-                //    if (SelectedSong == null || SelectedSong?.Duration < 0)
-                //        return TimeSpan.FromSeconds(0).ToString(format);
-                //    return TimeSpan.FromSeconds(SelectedSong.Duration).ToString(format);
-                //}).Result;
+                return Timify(_selectedSong.Duration);
             }
         }
 
-        private void UpdatePositionString()
+        private string Timify(double time)
         {
-            Task.Run(() =>
+            String ret = "--:--";
+            int hour, min, second;
+            if (time < 0)
+                return ret;
+
+            if (time < 3600)
             {
-                String str, format = @"mm\:ss";
-                if (SelectedSong != null && SelectedSong.Duration >= 3600)
-                    format = @"h\:mm\:ss";
-
-                if (_position < 0)
-                    str = TimeSpan.FromSeconds(0).ToString(format);
-                str = TimeSpan.FromSeconds(_position).ToString(format);
-
-                _positionString = str;
-                OnPropertyChanged(nameof(PositionString));
-            });
-        }
-
-        private void UpdateDurationString()
-        {
-            Task.Run(() =>
+                min = (int)(time / 60);
+                second = (int)(time % 60);
+                ret = $"{min.ToString("00")}:{second.ToString("00")}";
+            }
+            else
             {
-                String str, format = @"mm\:ss";
-                if (SelectedSong != null && SelectedSong.Duration >= 3600)
-                    format = @"h\:mm\:ss";
+                hour = (int)(time / 3600);
+                time = time / 60;
+                min = (int)(time / 60);
+                second = (int)(time % 60);
+                ret = $"{hour.ToString("00")}:{min.ToString("00")}:{second.ToString("00")}";
+            }
 
-                if (SelectedSong == null || SelectedSong?.Duration < 0)
-                    str = TimeSpan.FromSeconds(0).ToString(format);
-                str = TimeSpan.FromSeconds(SelectedSong.Duration).ToString(format);
-
-                _durationString = str;
-                OnPropertyChanged(nameof(DurationString));
-            });
+            return ret;
         }
-
-
-
     }
 }

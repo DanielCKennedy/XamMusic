@@ -3,7 +3,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     xmlns:cv="clr-namespace:Xamarin.Forms;assembly=Xamarin.Forms.CarouselView"
-    xmlns:local="clr-namespace:XamMusic.Controls;assembly=XamMusic"
+    xmlns:controls="clr-namespace:XamMusic.Controls;assembly=XamMusic"
     xmlns:effects="clr-namespace:XamMusic.Effects"
     x:Class="XamMusic.Controls.MusicBarControl"
     x:Name="MusicBar" Margin="0,0,0,0" Padding="0,0,0,0" BackgroundColor="Black">
@@ -35,12 +35,13 @@
                                     <effects:BlueProgressBarEffect />
                                 </ProgressBar.Effects>
                             </ProgressBar>
-                            <local:ArtworkImage Grid.Row="1" Grid.Column="0" x:Name="ArtworkImage" Margin="6,0,0,0" Artwork="{Binding Artwork}" IsVisible="{Binding HasArtwork}" HeightRequest="45" WidthRequest="45"/>
+                            <controls:ArtworkImage Grid.Row="1" Grid.Column="0" x:Name="ArtworkImage" Margin="6,0,0,0" Artwork="{Binding Artwork}" IsVisible="{Binding HasArtwork}" HeightRequest="45" WidthRequest="45"/>
                             <StackLayout Grid.Row="1" Grid.Column="1" Orientation="Vertical" Margin="0,0,0,0" Padding="0,0,0,0" Spacing="0" HorizontalOptions="Start" VerticalOptions="Center">
                                 <Label Text="{Binding Title}" Margin="0,0,0,0" Font="16" FontAttributes="Bold" LineBreakMode="TailTruncation"  HorizontalOptions="Start" TextColor="White"/>
                                 <Label Text="{Binding Artist}" LineBreakMode="TailTruncation"  Margin="0,0,0,0"  HorizontalOptions="Start" TextColor="LightGray"/>
                             </StackLayout>
-                            <Image Source="play_w.png" Grid.Row="1" Grid.Column="2" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" IsVisible="{Binding IsNotPlaying}" HeightRequest="40" WidthRequest="40">
+                            <controls:PlayPauseControl Grid.Row="1" Grid.Column="2" />
+                            <!--<Image Source="play_w.png" Grid.Row="1" Grid.Column="2" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" IsVisible="{Binding IsNotPlaying}" HeightRequest="40" WidthRequest="40">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding PlayCommand}" />
                                 </Image.GestureRecognizers>
@@ -49,7 +50,7 @@
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding PauseCommand}" />
                                 </Image.GestureRecognizers>
-                            </Image>
+                            </Image>-->
                         </Grid>
                     </DataTemplate>
                 </cv:CarouselView.ItemTemplate>

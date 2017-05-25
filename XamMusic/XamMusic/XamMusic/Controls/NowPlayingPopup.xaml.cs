@@ -23,11 +23,31 @@ namespace XamMusic.Controls
 
             // Workaround to avoid song restarting on create in iOS
             SliderStackLayout.Children.Add(SliderControl.Instance);
+            SizeChanged += NowPlayingPopup_SizeChanged;
+        }
+
+        private void NowPlayingPopup_SizeChanged(object sender, EventArgs e)
+        {
+            var temp = artwork;
+            artworkStackLayout.Children.Remove(artwork);
+            if (Height > Width)
+            {
+                temp.HeightRequest = -1;
+                temp.WidthRequest = -1;
+            }
+            else
+            {
+                temp.HeightRequest = Height / 3;
+            }
+            
+            artworkStackLayout.Children.Add(temp);
         }
 
         private async void ClosePopup(object sender, EventArgs e)
         {
             await Navigation.PopPopupAsync(true);
         }
+
+        
     }
 }
