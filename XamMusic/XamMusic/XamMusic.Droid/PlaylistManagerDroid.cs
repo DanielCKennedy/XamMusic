@@ -49,7 +49,8 @@ namespace XamMusic.Droid
         private static string[] _playlistProjections =
         {
             MediaStore.Audio.Playlists.InterfaceConsts.Id,
-            MediaStore.Audio.Playlists.InterfaceConsts.Name
+            MediaStore.Audio.Playlists.InterfaceConsts.Name,
+            MediaStore.Audio.Playlists.InterfaceConsts.DateModified
         };
 
         private static string[] _playlistSongsProjections =
@@ -80,7 +81,7 @@ namespace XamMusic.Droid
                 if (playlistCursor.MoveToFirst())
                 {
                     ulong id = ulong.Parse(playlistCursor.GetString(playlistCursor.GetColumnIndex(MediaStore.Audio.Playlists.InterfaceConsts.Id)));
-                    return new Playlist { Id = id, Title = name, Songs = new List<Song>(), IsDynamic = true };
+                    return new Playlist { Id = id, Title = name, Songs = new List<Song>(), IsDynamic = true, DateModified = DateTime.Now };
                 }
                 playlistCursor?.Close();
                 
@@ -190,9 +191,11 @@ namespace XamMusic.Droid
 
             int idColumn = playlistCursor.GetColumnIndex(MediaStore.Audio.Playlists.InterfaceConsts.Id);
             int nameColumn = playlistCursor.GetColumnIndex(MediaStore.Audio.Playlists.InterfaceConsts.Name);
+            int dateModifiedColumn = playlistCursor.GetColumnIndex(MediaStore.Audio.Playlists.InterfaceConsts.DateModified);
 
             ulong id;
             string name;
+            long time;
 
             if (playlistCursor.MoveToFirst())
             {
@@ -200,7 +203,11 @@ namespace XamMusic.Droid
                 {
                     id = ulong.Parse(playlistCursor.GetString(idColumn));
                     name = playlistCursor.GetString(nameColumn);
-                    playlists.Add(new Playlist { Id = id, Title = name, IsDynamic = true });
+                    time = long.Parse(playlistCursor.GetString(dateModifiedColumn));
+
+                    DateTime dateModified = new DateTime(1970, 1, 1, 0, 0, 0, DateTimeKind.Utc).AddMilliseconds(time);
+
+                    playlists.Add(new Playlist { Id = id, Title = name, IsDynamic = true , DateModified = dateModified});
                 } while (playlistCursor.MoveToNext());
             }
             playlistCursor?.Close();

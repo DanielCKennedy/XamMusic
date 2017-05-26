@@ -8,6 +8,7 @@ using Rg.Plugins.Popup.Extensions;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamMusic.Controls;
+using XamMusic.ViewModels;
 
 namespace XamMusic.Views
 {
@@ -16,6 +17,7 @@ namespace XamMusic.Views
     {
         public HomePage()
         {
+            this.BindingContext = new HomeViewModel();
             InitializeComponent();
         }
 

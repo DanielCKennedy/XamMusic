@@ -16,5 +16,7 @@ namespace XamMusic.Models
 
         public bool IsDynamic { get; set; }
 
+        public DateTime DateModified { get; set; }
+
     }
 }
