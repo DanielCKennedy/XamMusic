@@ -4,7 +4,8 @@
              xmlns:controls="clr-namespace:XamMusic.Controls;assembly=XamMusic"
              x:Class="XamMusic.Views.PlaylistPage"
              x:Name="PlaylistPage"
-             Title="{Binding Title}">
+             Title="{Binding Title}"
+             BackgroundColor="#2f3037">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Queue" Clicked="ToolbarItem_Clicked"></ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -14,30 +15,46 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <ActivityIndicator Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center"
-                           IsRunning="True" IsVisible="{Binding SongsLoading}" />
+        
         <ListView x:Name="playlistListView" ItemsSource="{Binding Songs}"
                   ItemTapped="playlistListView_ItemTapped"
-                  Grid.Row="0">
+                  Grid.Row="0"
+                  BackgroundColor="#2f3037"
+                  SeparatorColor="Gray">
             <ListView.Header>
                 <StackLayout Orientation="Horizontal">
                     <Label BindingContext="{Binding Source={x:Reference PlaylistPage}, Path=BindingContext}"
                            Text="{Binding CountText}" HorizontalOptions="StartAndExpand"
                            FontAttributes="Bold" FontSize="Medium" HorizontalTextAlignment="Center"
                            VerticalOptions="Center" VerticalTextAlignment="Center"
-                           Margin="10, 0, 0, 0"/>
-                    <Button Text="Shuffle" Clicked="Button_Clicked" />
-                    <Button Text="Add To Queue" Clicked="Button_Clicked_1" />
+                           Margin="10, 0, 0, 0" TextColor="White"/>
+                    <Button Text="Shuffle" Clicked="Button_Clicked" BorderColor="#2287CA" BorderWidth="1">
+                        <Button.WidthRequest>
+                            <OnPlatform x:TypeArguments="x:Double" Android="-1" iOS="100" />
+                        </Button.WidthRequest>
+                        <Button.TextColor>
+                            <OnPlatform x:TypeArguments="Color" Android="Black" iOS="#2287CA" />
+                        </Button.TextColor>
+                    </Button>
+                    <Button Text="Add To Queue" Clicked="Button_Clicked_1" BorderColor="#2287CA" BorderWidth="1">
+                        <Button.WidthRequest>
+                            <OnPlatform x:TypeArguments="x:Double" Android="-1" iOS="100" />
+                        </Button.WidthRequest>
+                        <Button.TextColor>
+                            <OnPlatform x:TypeArguments="Color" Android="Black" iOS="#2287CA" />
+                        </Button.TextColor>
+                    </Button>
                 </StackLayout>
             </ListView.Header>
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <controls:SongViewCell />
-                    <!--<TextCell Text="{Binding Title}" Detail="{Binding Artist}">
-                    </TextCell>-->
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        <ActivityIndicator Grid.Row="0" HorizontalOptions="Center" VerticalOptions="Center"
+                           IsRunning="True" IsVisible="{Binding SongsLoading}"
+                           Color="#2287CA" />
         <controls:MusicBarControl Grid.Row="1" x:Name="MusicBarController" HeightRequest="65" VerticalOptions="End"/>
     </Grid>
 </ContentPage>
