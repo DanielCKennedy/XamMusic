@@ -3,23 +3,43 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
+             xmlns:controls="clr-namespace:XamMusic.Controls"
              x:Class="XamMusic.Controls.QueuePopup"
              BackgroundColor="#F0000000"
              CloseWhenBackgroundIsClicked="False"
              HasSystemPadding="True">
     <StackLayout Orientation="Vertical" Padding="10, 5" Spacing="3">
         <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Start" HorizontalOptions="Center">
-            <Button Text="Shuffle" Command="{Binding ShuffleCommand}" />
-            <Button Text="Clear" Command="{Binding ClearQueueCommand}"/>
+            <Button Text="Shuffle" Command="{Binding ShuffleCommand}" BorderColor="#2287CA" BorderWidth="1">
+                <Button.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double" Android="-1" iOS="100" />
+                </Button.WidthRequest>
+                <Button.TextColor>
+                    <OnPlatform x:TypeArguments="Color" Android="Black" iOS="#2287CA" />
+                </Button.TextColor>
+            </Button>
+            <Button Text="Clear" Command="{Binding ClearQueueCommand}" BorderColor="#2287CA" BorderWidth="1">
+                <Button.WidthRequest>
+                    <OnPlatform x:TypeArguments="x:Double" Android="-1" iOS="100" />
+                </Button.WidthRequest>
+                <Button.TextColor>
+                    <OnPlatform x:TypeArguments="Color" Android="Black" iOS="#2287CA" />
+                </Button.TextColor>
+            </Button>
         </StackLayout>
-        <ListView x:Name="QueueListView" ItemsSource="{Binding Queue}"
-                  SelectedItem="{Binding SelectedSong, Mode=TwoWay}" VerticalOptions="FillAndExpand">
+        <ListView x:Name="QueueListView" ItemsSource="{Binding Queue}" BackgroundColor="Transparent"
+                  SelectedItem="{Binding SelectedSong, Mode=TwoWay}" VerticalOptions="FillAndExpand"
+                  SeparatorVisibility="Default" SeparatorColor="#2287CA">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <TextCell Text="{Binding Title}" Detail="{Binding Artist}"/>
+                    <TextCell Text="{Binding Title}" Detail="{Binding Artist}" TextColor="White" DetailColor="LightGray"/>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Button BackgroundColor="Red" TextColor="Black" Text="X" VerticalOptions="End" Clicked="ClosePopup" HorizontalOptions="Center"/>
+        <Image Grid.Column="1" Source="close_b.png" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="40" WidthRequest="40">
+            <Image.GestureRecognizers>
+                <TapGestureRecognizer Tapped="ClosePopup" />
+            </Image.GestureRecognizers>
+        </Image>
     </StackLayout>
 </pages:PopupPage>
