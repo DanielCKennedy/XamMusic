@@ -2,14 +2,21 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="XamMusic.Views.MenuPage"
-             Title="Menu">
+             Title="Menu" BackgroundColor="Black">
     <StackLayout>
         <ListView x:Name="ListViewMenuItems"
-              SeparatorVisibility="None"
+              SeparatorVisibility="Default"
+                  SeparatorColor="DarkGray"
+                  BackgroundColor="#9925262c"
               HasUnevenRows="true"
               ItemsSource="{Binding PlaylistItems}">
             <ListView.Header>
-                <Grid BackgroundColor="#03A9F4">
+                <Grid>
+                    <Grid.BackgroundColor>
+                        <OnPlatform x:TypeArguments="Color"
+                                    Android="Black"
+                                    iOS="Transparent" />
+                    </Grid.BackgroundColor>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="10"/>
                         <ColumnDefinition Width="*"/>
@@ -17,15 +24,24 @@
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
                         <RowDefinition Height="30"/>
-                        <RowDefinition Height="80"/>
+                        <RowDefinition Height="20"/>
                         <RowDefinition Height="Auto"/>
-                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="2"/>
+                        <RowDefinition Height="2" />
                     </Grid.RowDefinitions>
-                    <Label 
-                        Grid.Column="1"
-                        Grid.Row="2"
+                    <StackLayout Grid.Column="1" Grid.Row="2" Orientation="Horizontal">
+                        <Label 
+                            HorizontalOptions="StartAndExpand"
                         Text="Xam Music"
-                        Style="{DynamicResource SubtitleStyle}"/>
+                        TextColor="White"
+                        FontSize="Large"
+                        FontAttributes="Bold"/>
+                        <Switch HorizontalOptions="End"
+                                IsToggled="False"
+                                Toggled="Switch_Toggled"/>
+                    </StackLayout>
+                    
+                    <BoxView Grid.Row="4" Grid.ColumnSpan="3" BackgroundColor="#2287CA"  HeightRequest="2" HorizontalOptions="FillAndExpand" VerticalOptions="End"/>
                 </Grid>
             </ListView.Header>
             <ListView.ItemTemplate>
@@ -37,16 +53,32 @@
                                 VerticalOptions="FillAndExpand" 
                                 VerticalTextAlignment="Center" 
                                 Text="{Binding Playlist.Title}" 
+                                TextColor="LightGray"
                                 FontSize="24"/>
-                            <Button VerticalOptions="End" HorizontalOptions="End" BackgroundColor="Aqua" Text="+" IsVisible="{Binding Playlist.IsDynamic}"
-                                    Command="{Binding AddSong}"/>
+                            <Image VerticalOptions="Center" HorizontalOptions="End" Source="add_button_t.png" IsVisible="{Binding CanAdd}"
+                                   HeightRequest="30" WidthRequest="30">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                    <TapGestureRecognizer Command="{Binding AddSong}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            <!--<Button VerticalOptions="End" HorizontalOptions="End" BackgroundColor="Aqua" Text="+" IsVisible="{Binding Playlist.IsDynamic}"
+                                    Command="{Binding AddSong}"/>-->
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
             <ListView.Footer>
-                <Button VerticalOptions="Center" HorizontalOptions="Start" BackgroundColor="Green" Text="+"
-                        Clicked="Button_Clicked"/>
+                <StackLayout Orientation="Horizontal">
+                    <Button VerticalOptions="Center" HorizontalOptions="FillAndExpand" Text="Create Playlist" TextColor="#2287CA" BorderColor="#2287CA" BorderWidth="1" BackgroundColor="Transparent"
+                        Clicked="Button_Clicked" Margin="10">
+                        <Button.Opacity>
+                            <OnPlatform x:TypeArguments="x:Double" Android="1" iOS="1"/>
+                        </Button.Opacity>
+                    </Button>
+                </StackLayout>
+                
+
             </ListView.Footer>
         </ListView>
     </StackLayout>
