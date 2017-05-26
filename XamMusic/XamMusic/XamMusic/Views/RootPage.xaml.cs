@@ -18,7 +18,7 @@ namespace XamMusic.Views
         {
             Detail = new NavigationPage(new HomePage())
             {
-                BarBackgroundColor = Color.FromHex("#111218")
+                BarBackgroundColor = Color.FromHex("#16171D")
             };
             InitializeComponent();
 
@@ -33,7 +33,7 @@ namespace XamMusic.Views
                         PlaylistViewModel.Instance = null;
                         Detail = new NavigationPage(new HomePage())
                         {
-                            BarBackgroundColor = Color.FromHex("#111218")
+                            BarBackgroundColor = Color.FromHex("#16171D")
                         };
                     }
                     else
@@ -41,7 +41,7 @@ namespace XamMusic.Views
                         PlaylistPage page = new PlaylistPage(item);
                         Detail = new NavigationPage(page)
                         {
-                            BarBackgroundColor = Color.FromHex("#111218")
+                            BarBackgroundColor = Color.FromHex("#16171D")
                         };
                     }
                     

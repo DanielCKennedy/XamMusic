@@ -17,7 +17,7 @@
             <Label Text="{Binding Artist}" LineBreakMode="TailTruncation" TextColor="#A5A5A5"/>
         </StackLayout>
         
-        <ffimageloading:CachedImage Grid.Column="2" Source="dots_w.png" HeightRequest="25" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+        <ffimageloading:CachedImage Grid.Column="2" Source="dots_w.png" HeightRequest="20" VerticalOptions="Center" HorizontalOptions="FillAndExpand">
             <ffimageloading:CachedImage.GestureRecognizers>
                 <TapGestureRecognizer Tapped="SongOptionsPopup" />
             </ffimageloading:CachedImage.GestureRecognizers>
