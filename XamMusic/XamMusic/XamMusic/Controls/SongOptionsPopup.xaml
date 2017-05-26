@@ -10,7 +10,7 @@
         <AbsoluteLayout>
             <Frame
                 x:Name="FrameContainer"
-                Margin="15"
+                Margin="10"
                 HorizontalOptions="Center"
                 BackgroundColor="WhiteSmoke">
                 <StackLayout
@@ -21,10 +21,12 @@
                            HorizontalOptions="Center"
                            Text="{Binding Title}"
                            Font="20"
-                           FontAttributes="Bold"/>
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
                     <Button
                         Margin="10, 5"
-                        BackgroundColor="#7dbbe6"
+                        TextColor="WhiteSmoke"
+                        BackgroundColor="#2287CA"
                         HorizontalOptions="Fill"
                         Clicked="PlayNext"
                         Text="Play Next">
@@ -34,7 +36,8 @@
                     </Button>
                     <Button
                         Margin="10, 5"
-                        BackgroundColor="#7dbbe6"
+                        TextColor="WhiteSmoke"
+                        BackgroundColor="#2287CA"
                         HorizontalOptions="Fill"
                         Clicked="AddToQueue"
                         Text="Add To End Of Queue">

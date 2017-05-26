@@ -12,15 +12,6 @@
             </Style>
         </ResourceDictionary>
     </pages:PopupPage.Resources>
-    <pages:PopupPage.Animation>
-        <animations:ScaleAnimation
-            PositionIn="Center"
-            PositionOut="Center"
-            ScaleIn="1"
-            ScaleOut="0.7"
-            DurationIn="500"
-            EasingIn="BounceOut"/>
-    </pages:PopupPage.Animation>
     <ScrollView
         HorizontalOptions="Center"
         VerticalOptions="Center">
@@ -29,7 +20,7 @@
                 x:Name="FrameContainer"
                 Margin="15"
                 HorizontalOptions="Center"
-                BackgroundColor="Wheat">
+                BackgroundColor="WhiteSmoke">
                 <StackLayout
                     IsClippedToBounds="True"
                     Padding="10, 5"
@@ -38,15 +29,17 @@
                            HorizontalOptions="Center"
                            Text="Create Playlist"
                            Font="20"
-                           FontAttributes="Bold"/>
+                           FontAttributes="Bold"
+                           TextColor="Black"/>
                     <Entry
                         HorizontalOptions="Center"
                         x:Name="PlaylistNameEntry"
-                        Style="{StaticResource EntryStyle}"
+                        TextColor="Gray"
                         Placeholder="Playlist Name" />
                     <Button
+                        TextColor="WhiteSmoke"
                         Margin="10, 5"
-                        BackgroundColor="#7dbbe6"
+                        BackgroundColor="#2287CA"
                         HorizontalOptions="Fill"
                         Clicked="CreatePlaylist"
                         Text="Create">
