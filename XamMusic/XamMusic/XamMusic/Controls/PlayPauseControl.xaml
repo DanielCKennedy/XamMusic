@@ -1,21 +1,22 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="XamMusic.Controls.PlayPauseControl">
   <ContentView.Content>
       <StackLayout>
-            <Image Source="play_w.png" IsVisible="{Binding IsNotPlaying}" HeightRequest="40" WidthRequest="40">
-                <Image.GestureRecognizers>
+            <ffimageloading:CachedImage Source="play_w.png" IsVisible="{Binding IsNotPlaying}" HeightRequest="40" WidthRequest="40">
+                <ffimageloading:CachedImage.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                     <TapGestureRecognizer Command="{Binding PlayCommand}" />
-                </Image.GestureRecognizers>
-            </Image>
-            <Image Source="pause_w.png" IsVisible="{Binding IsPlaying}" HeightRequest="40" WidthRequest="40">
-                <Image.GestureRecognizers>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
+            <ffimageloading:CachedImage Source="pause_w.png" IsVisible="{Binding IsPlaying}" HeightRequest="40" WidthRequest="40">
+                <ffimageloading:CachedImage.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                     <TapGestureRecognizer Command="{Binding PauseCommand}" />
-                </Image.GestureRecognizers>
-            </Image>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
         </StackLayout>
   </ContentView.Content>
 </ContentView>

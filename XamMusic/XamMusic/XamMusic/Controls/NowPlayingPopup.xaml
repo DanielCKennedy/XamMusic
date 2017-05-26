@@ -4,6 +4,7 @@
                  xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
                  xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
                  xmlns:controls="clr-namespace:XamMusic.Controls;assembly=XamMusic"
+                 xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
                  x:Class="XamMusic.Controls.NowPlayingPopup"
                  BackgroundColor="#F0000000"
                  CloseWhenBackgroundIsClicked="False"
@@ -45,11 +46,11 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Label Grid.Column="0" Text="{Binding PositionString}" HorizontalOptions="Start" VerticalOptions="Start" TextColor="White" Margin="15, 0, 0, 0"/>
-                <Image Grid.Column="1" Source="close_b.png" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="40" WidthRequest="40">
-                    <Image.GestureRecognizers>
+                <ffimageloading:CachedImage Grid.Column="1" Source="close_good.png" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="40" WidthRequest="40">
+                    <ffimageloading:CachedImage.GestureRecognizers>
                         <TapGestureRecognizer Tapped="ClosePopup" />
-                    </Image.GestureRecognizers>
-                </Image>
+                    </ffimageloading:CachedImage.GestureRecognizers>
+                </ffimageloading:CachedImage>
                 <Label Grid.Column="2" Text="{Binding DurationString}" HorizontalOptions="End" VerticalOptions="Start" TextColor="White"  Margin="0, 0, 15, 0"/>
             </Grid>
         </StackLayout>

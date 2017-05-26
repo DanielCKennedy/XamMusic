@@ -16,7 +16,10 @@ namespace XamMusic.Views
     {
         public RootPage()
         {
-            Detail = new NavigationPage(new HomePage());
+            Detail = new NavigationPage(new HomePage())
+            {
+                BarBackgroundColor = Color.FromHex("#111218")
+            };
             InitializeComponent();
 
             MenuPage.PlaylistList.ItemSelected += (s, e) =>
@@ -28,12 +31,18 @@ namespace XamMusic.Views
                     if (!item.Playlist.IsDynamic && item.Playlist.Title == "Home")
                     {
                         PlaylistViewModel.Instance = null;
-                        Detail = new NavigationPage(new HomePage());
+                        Detail = new NavigationPage(new HomePage())
+                        {
+                            BarBackgroundColor = Color.FromHex("#111218")
+                        };
                     }
                     else
                     {
                         PlaylistPage page = new PlaylistPage(item);
-                        Detail = new NavigationPage(page);
+                        Detail = new NavigationPage(page)
+                        {
+                            BarBackgroundColor = Color.FromHex("#111218")
+                        };
                     }
                     
                     IsPresented = false;

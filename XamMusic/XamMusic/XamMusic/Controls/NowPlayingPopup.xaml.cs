@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using FFImageLoading.Forms;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using XamMusic.ViewModels;
@@ -45,8 +46,9 @@ namespace XamMusic.Controls
 
         private async void ClosePopup(object sender, EventArgs e)
         {
-            ((Image)sender).Opacity = 0.6;
-            await Navigation.PopPopupAsync(true);
+            ((CachedImage)sender).Opacity = 0.6;
+            //await Navigation.PopPopupAsync(true);
+            await Navigation.PopAllPopupAsync(true);
         }
 
     }

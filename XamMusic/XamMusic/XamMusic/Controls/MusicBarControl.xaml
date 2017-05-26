@@ -40,7 +40,7 @@
                                 <Label Text="{Binding Title}" Margin="0,0,0,0" Font="16" FontAttributes="Bold" LineBreakMode="TailTruncation"  HorizontalOptions="Start" TextColor="White"/>
                                 <Label Text="{Binding Artist}" LineBreakMode="TailTruncation"  Margin="0,0,0,0"  HorizontalOptions="Start" TextColor="LightGray"/>
                             </StackLayout>
-                            <controls:PlayPauseControl Grid.Row="1" Grid.Column="2" />
+                            <controls:PlayPauseControl Grid.Row="1" Grid.Column="2" HeightRequest="30" WidthRequest="30"/>
                             <!--<Image Source="play_w.png" Grid.Row="1" Grid.Column="2" BindingContext="{Binding Source={x:Reference MusicBar}, Path=BindingContext}" IsVisible="{Binding IsNotPlaying}" HeightRequest="40" WidthRequest="40">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding PlayCommand}" />

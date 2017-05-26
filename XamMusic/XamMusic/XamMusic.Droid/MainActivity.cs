@@ -9,6 +9,7 @@ using Android.OS;
 using Android.Content;
 using XamMusic.Droid.Audio;
 using FFImageLoading.Forms.Droid;
+using Android.Graphics;
 
 namespace XamMusic.Droid
 {
@@ -29,6 +30,10 @@ namespace XamMusic.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
+
+            // Set Status Bar Color
+            Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
+            Window.SetStatusBarColor(Color.Black);
 
             // FFImageLoading
             CachedImageRenderer.Init();

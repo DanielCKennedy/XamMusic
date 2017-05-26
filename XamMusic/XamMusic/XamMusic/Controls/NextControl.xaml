@@ -1,15 +1,16 @@
 ﻿<?xml version="1.0" encoding="UTF-8"?>
 <ContentView xmlns="http://xamarin.com/schemas/2014/forms" 
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="XamMusic.Controls.NextControl">
   <ContentView.Content>
       <StackLayout>
-            <Image Source="next.png" HeightRequest="40" WidthRequest="40">
-                <Image.GestureRecognizers>
+            <ffimageloading:CachedImage Source="next.png" HeightRequest="40" WidthRequest="40">
+                <ffimageloading:CachedImage.GestureRecognizers>
                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                     <TapGestureRecognizer Command="{Binding NextCommand}" />
-                </Image.GestureRecognizers>
-            </Image>
+                </ffimageloading:CachedImage.GestureRecognizers>
+            </ffimageloading:CachedImage>
         </StackLayout>
   </ContentView.Content>
 </ContentView>

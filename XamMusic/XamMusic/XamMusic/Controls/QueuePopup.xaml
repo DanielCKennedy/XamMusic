@@ -4,11 +4,12 @@
              xmlns:pages="clr-namespace:Rg.Plugins.Popup.Pages;assembly=Rg.Plugins.Popup"
              xmlns:animations="clr-namespace:Rg.Plugins.Popup.Animations;assembly=Rg.Plugins.Popup"
              xmlns:controls="clr-namespace:XamMusic.Controls"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms"
              x:Class="XamMusic.Controls.QueuePopup"
              BackgroundColor="#F0000000"
              CloseWhenBackgroundIsClicked="False"
              HasSystemPadding="True">
-    <StackLayout Orientation="Vertical" Padding="10, 5" Spacing="3">
+    <StackLayout Orientation="Vertical" Padding="10, 5" Spacing="5">
         <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Start" HorizontalOptions="Center">
             <Button Text="Shuffle" Command="{Binding ShuffleCommand}" BorderColor="#2287CA" BorderWidth="1">
                 <Button.WidthRequest>
@@ -36,10 +37,10 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-        <Image Grid.Column="1" Source="close_b.png" HorizontalOptions="Center" VerticalOptions="Center" HeightRequest="40" WidthRequest="40">
-            <Image.GestureRecognizers>
+        <ffimageloading:CachedImage Source="close_good.png" HorizontalOptions="Center" VerticalOptions="End" HeightRequest="40" WidthRequest="40">
+            <ffimageloading:CachedImage.GestureRecognizers>
                 <TapGestureRecognizer Tapped="ClosePopup" />
-            </Image.GestureRecognizers>
-        </Image>
+            </ffimageloading:CachedImage.GestureRecognizers>
+        </ffimageloading:CachedImage>
     </StackLayout>
 </pages:PopupPage>
