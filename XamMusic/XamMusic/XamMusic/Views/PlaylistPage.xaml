@@ -22,13 +22,13 @@
                   BackgroundColor="#2f3037"
                   SeparatorColor="Gray">
             <ListView.Header>
-                <StackLayout Orientation="Horizontal">
+                <StackLayout Orientation="Horizontal" BindingContext="{Binding Source={x:Reference PlaylistPage}, Path=BindingContext}">
                     <Label BindingContext="{Binding Source={x:Reference PlaylistPage}, Path=BindingContext}"
                            Text="{Binding CountText}" HorizontalOptions="StartAndExpand"
                            FontAttributes="Bold" FontSize="Medium" HorizontalTextAlignment="Center"
                            VerticalOptions="Center" VerticalTextAlignment="Center"
                            Margin="10, 0, 0, 0" TextColor="White"/>
-                    <Button Text="Shuffle" Clicked="Button_Clicked" BorderColor="#2287CA" BorderWidth="1">
+                    <Button Text="Shuffle" Clicked="Button_Clicked" BorderColor="#2287CA" BorderWidth="1" IsEnabled="{Binding HasSongs}">
                         <Button.WidthRequest>
                             <OnPlatform x:TypeArguments="x:Double" Android="-1" iOS="100" />
                         </Button.WidthRequest>
@@ -36,7 +36,7 @@
                             <OnPlatform x:TypeArguments="Color" Android="Black" iOS="#2287CA" />
                         </Button.TextColor>
                     </Button>
-                    <Button Text="Add To Queue" Clicked="Button_Clicked_1" BorderColor="#2287CA" BorderWidth="1">
+                    <Button Text="Add To Queue" Clicked="Button_Clicked_1" BorderColor="#2287CA" BorderWidth="1" IsEnabled="{Binding HasSongs}">
                         <Button.WidthRequest>
                             <OnPlatform x:TypeArguments="x:Double" Android="-1" iOS="100" />
                         </Button.WidthRequest>

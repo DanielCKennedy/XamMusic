@@ -3,8 +3,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:controls="clr-namespace:XamMusic.Controls;assembly=XamMusic"
              xmlns:vm="clr-namespace:XamMusic.ViewModels"
+             xmlns:dlcontrols="clr-namespace:DLToolkit.Forms.Controls;assembly=DLToolkit.Forms.Controls.FlowListView"
              x:Class="XamMusic.Views.HomePage"
-             BackgroundColor="#2f3037">
+             BackgroundColor="#2f3037"
+             Title="Xam Music">
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Queue" Clicked="ToolbarItem_Clicked"></ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -14,6 +16,40 @@
                 <RowDefinition Height="*" />
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
+
+            <ScrollView Grid.Row="0">
+                <StackLayout Orientation="Vertical">
+                    <Label Text="Recent Playlists:" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Medium" FontAttributes="Bold" TextColor="LightGray" Margin="10, 5"/>
+                    <dlcontrols:FlowListView x:Name="PlaylistGridView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FlowItemsSource="{Binding Playlists}" HasUnevenRows="True" RowHeight="210" FlowColumnMinWidth="160">
+                        <dlcontrols:FlowListView.FlowColumnTemplate>
+                            <DataTemplate>
+                                <Grid BackgroundColor="Transparent">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="5" />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition Width="5" />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="5" />
+                                        <RowDefinition Height="150" />
+                                        <RowDefinition Height="50" />
+                                        <RowDefinition Height="5" />
+                                    </Grid.RowDefinitions>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                    </Grid.GestureRecognizers>
+                                    <BoxView BackgroundColor="Black" Grid.Row="1" Grid.Column="1" HeightRequest="150" WidthRequest="150" />
+                                    <controls:ArtworkImage Grid.Row="1" Grid.Column="1" HeightRequest="150" WidthRequest="150" Artwork="{Binding Artwork}" />
+                                    <Label Text="{Binding Title}" Grid.Row="2" Grid.Column="1" TextColor="White" HorizontalOptions="Start" FontSize="Medium"/>
+                                </Grid>
+                            </DataTemplate>
+                        </dlcontrols:FlowListView.FlowColumnTemplate>
+                    </dlcontrols:FlowListView>
+                </StackLayout>
+            </ScrollView>
+
+            <ActivityIndicator Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Color="#2287CA" IsRunning="True" IsVisible="{Binding IsLoading}" />
+
 
 
             <controls:MusicBarControl Grid.Row="1" x:Name="MusicBarController" HeightRequest="65" VerticalOptions="End" />

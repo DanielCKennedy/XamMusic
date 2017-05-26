@@ -26,9 +26,45 @@ namespace XamMusic.ViewModels
             }
         }
 
+        private bool _isLoading;
+
+        public bool IsLoading
+        {
+            get { return _isLoading; }
+            set
+            {
+                _isLoading = value;
+                OnPropertyChanged(nameof(IsLoading));
+            }
+        }
+
+
         public HomeViewModel()
         {
-            Playlists = DependencyService.Get<IPlaylistManager>().GetPlaylists().OrderBy(p => p.DateModified).ToList();
+            IsLoading = true;
+            Task.Run(async () =>
+            {
+                var pls = DependencyService.Get<IPlaylistManager>().GetPlaylists().OrderBy(p => p.DateModified).ToList();
+                foreach (Playlist pl in pls)
+                {
+                    pl.Songs = await DependencyService.Get<IPlaylistManager>().GetPlaylistSongs(pl.Id);
+                    if (pl.Songs?.Count > 0)
+                    {
+                        foreach (Song song in pl.Songs)
+                        {
+                            if (song.HasArtwork)
+                            {
+                                pl.Artwork = song.Artwork;
+                                break;
+                            }
+                        }
+                    }
+                }
+                IsLoading = false;
+                Playlists = pls;
+            });
+            
+
         }
 
     }

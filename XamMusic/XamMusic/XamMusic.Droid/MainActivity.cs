@@ -10,6 +10,7 @@ using Android.Content;
 using XamMusic.Droid.Audio;
 using FFImageLoading.Forms.Droid;
 using Android.Graphics;
+using DLToolkit.Forms.Controls;
 
 namespace XamMusic.Droid
 {
@@ -38,6 +39,7 @@ namespace XamMusic.Droid
             // FFImageLoading
             CachedImageRenderer.Init();
 
+            // AudioService setup
             Instance = this;
             AudioServiceIntent = new Intent(Droid.Audio.AudioService.ActionStart);
             ComponentName name = StartService(AudioServiceIntent);
@@ -45,6 +47,10 @@ namespace XamMusic.Droid
             bool binded = BindService(AudioServiceIntent, _connection, Bind.AutoCreate);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+
+            // FlowListView
+            FlowListView.Init();
+
             LoadApplication(new App());
         }
 

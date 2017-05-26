@@ -18,5 +18,9 @@ namespace XamMusic.Models
 
         public DateTime DateModified { get; set; }
 
+        public bool HasArtwork { get { return Artwork != null && !String.IsNullOrEmpty(Artwork.ToString()); } }
+
+        public object Artwork { get; set; }
+
     }
 }

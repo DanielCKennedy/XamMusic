@@ -74,9 +74,12 @@ namespace XamMusic.ViewModels
                 _playlist.Songs = _songs;
                 OnPropertyChanged(nameof(Songs));
                 OnPropertyChanged(nameof(CountText));
+                OnPropertyChanged(nameof(HasSongs));
             }
         }
-        
+
+        public bool HasSongs { get { return _songs != null && _songs.Count > 0; } }
+
         public string CountText
         {
             get
