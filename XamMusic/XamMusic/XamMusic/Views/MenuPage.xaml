@@ -62,8 +62,6 @@
                                     <TapGestureRecognizer Command="{Binding AddSong}" />
                                 </Image.GestureRecognizers>
                             </Image>
-                            <!--<Button VerticalOptions="End" HorizontalOptions="End" BackgroundColor="Aqua" Text="+" IsVisible="{Binding Playlist.IsDynamic}"
-                                    Command="{Binding AddSong}"/>-->
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
@@ -77,8 +75,6 @@
                         </Button.Opacity>
                     </Button>
                 </StackLayout>
-                
-
             </ListView.Footer>
         </ListView>
     </StackLayout>

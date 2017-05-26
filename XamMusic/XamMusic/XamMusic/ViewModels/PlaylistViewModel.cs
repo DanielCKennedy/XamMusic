@@ -18,6 +18,8 @@ namespace XamMusic.ViewModels
 
         public Command PlayCommand { get; set; }
 
+        public ulong Id { get; set; }
+
         private SongComparer _comparer;
         private Playlist _playlist;
 
@@ -26,6 +28,7 @@ namespace XamMusic.ViewModels
             Instance = this;
             _comparer = new SongComparer();
             _playlist = playlistItem.Playlist;
+            Id = (ulong)_playlist?.Id;
 
             Title = playlistItem.Playlist.Title;
             if (_playlist.Songs == null || _playlist.Songs.Count == 0)

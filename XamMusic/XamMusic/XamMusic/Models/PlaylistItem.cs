@@ -52,8 +52,8 @@ namespace XamMusic.Models
                             MusicStateViewModel.Instance.SelectedSong);
                         playlist.Songs = await DependencyService.Get<IPlaylistManager>().GetPlaylistSongs(
                             playlist.Id);
-                        //System.Diagnostics.Debug.WriteLine("Instance = " + PlaylistViewModel.Instance);
-                        if (PlaylistViewModel.Instance != null)
+                        
+                        if (PlaylistViewModel.Instance?.Id == playlist.Id)
                         {
                             PlaylistViewModel.Instance.Songs = playlist.Songs;
                         }
