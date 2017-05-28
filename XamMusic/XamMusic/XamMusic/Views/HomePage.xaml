@@ -17,10 +17,13 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <ScrollView Grid.Row="0">
-                <StackLayout Orientation="Vertical">
-                    <Label Text="Recent Playlists:" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Medium" FontAttributes="Bold" TextColor="LightGray" Margin="10, 5"/>
-                    <dlcontrols:FlowListView x:Name="PlaylistGridView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FlowItemsSource="{Binding Playlists}" HasUnevenRows="True" RowHeight="210" FlowColumnMinWidth="160">
+            <!--<ScrollView Grid.Row="0">
+                <StackLayout Orientation="Vertical">-->
+                    
+                    <dlcontrols:FlowListView Grid.Row="0" x:Name="PlaylistGridView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FlowItemsSource="{Binding Playlists}" HasUnevenRows="True" RowHeight="210" FlowColumnMinWidth="160">
+                        <dlcontrols:FlowListView.Header>
+                            <Label Text="Recent Playlists:" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Medium" FontAttributes="Bold" TextColor="LightGray" Margin="10, 5"/>
+                        </dlcontrols:FlowListView.Header>
                         <dlcontrols:FlowListView.FlowColumnTemplate>
                             <DataTemplate>
                                 <Grid BackgroundColor="Transparent">
@@ -45,8 +48,8 @@
                             </DataTemplate>
                         </dlcontrols:FlowListView.FlowColumnTemplate>
                     </dlcontrols:FlowListView>
-                </StackLayout>
-            </ScrollView>
+                <!--</StackLayout>
+            </ScrollView>-->
 
             <ActivityIndicator Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Color="#2287CA" IsRunning="True" IsVisible="{Binding IsLoading}" />
 

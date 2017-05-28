@@ -44,7 +44,7 @@ namespace XamMusic.ViewModels
             IsLoading = true;
             Task.Run(async () =>
             {
-                var pls = DependencyService.Get<IPlaylistManager>().GetPlaylists().OrderBy(p => p.DateModified).ToList();
+                var pls = DependencyService.Get<IPlaylistManager>().GetPlaylists().OrderByDescending(p => p.DateModified).ToList();
                 foreach (Playlist pl in pls)
                 {
                     pl.Songs = await DependencyService.Get<IPlaylistManager>().GetPlaylistSongs(pl.Id);

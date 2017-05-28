@@ -11,7 +11,7 @@
              HasSystemPadding="True">
     <StackLayout Orientation="Vertical" Padding="10, 5" Spacing="5">
         <StackLayout Orientation="Horizontal" Spacing="5" VerticalOptions="Start" HorizontalOptions="Center">
-            <Button Text="Shuffle" Command="{Binding ShuffleCommand}" BorderColor="#2287CA" BorderWidth="1">
+            <Button Text="Shuffle" Command="{Binding ShuffleCommand}" BorderColor="#2287CA" BorderWidth="1" IsEnabled="{Binding HasSongs}">
                 <Button.WidthRequest>
                     <OnPlatform x:TypeArguments="x:Double" Android="-1" iOS="100" />
                 </Button.WidthRequest>
@@ -19,7 +19,7 @@
                     <OnPlatform x:TypeArguments="Color" Android="Black" iOS="#2287CA" />
                 </Button.TextColor>
             </Button>
-            <Button Text="Clear" Command="{Binding ClearQueueCommand}" BorderColor="#2287CA" BorderWidth="1">
+            <Button Text="Clear" Command="{Binding ClearQueueCommand}" BorderColor="#2287CA" BorderWidth="1" IsEnabled="{Binding HasSongs}">
                 <Button.WidthRequest>
                     <OnPlatform x:TypeArguments="x:Double" Android="-1" iOS="100" />
                 </Button.WidthRequest>

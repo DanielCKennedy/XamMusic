@@ -11,6 +11,7 @@ using XamMusic.Droid.Audio;
 using FFImageLoading.Forms.Droid;
 using Android.Graphics;
 using DLToolkit.Forms.Controls;
+using Android.Graphics.Drawables;
 
 namespace XamMusic.Droid
 {
@@ -31,7 +32,7 @@ namespace XamMusic.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-
+            
             // Set Status Bar Color
             Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
             Window.SetStatusBarColor(Color.Black);
@@ -51,7 +52,7 @@ namespace XamMusic.Droid
             // FlowListView
             FlowListView.Init();
 
-            LoadApplication(new App());
+            LoadApplication(new App());            
         }
 
         protected override void OnDestroy()
