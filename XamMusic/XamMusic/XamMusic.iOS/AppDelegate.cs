@@ -5,6 +5,7 @@ using System.Linq;
 using Foundation;
 using UIKit;
 using FFImageLoading.Forms.Touch;
+using DLToolkit.Forms.Controls;
 
 namespace XamMusic.iOS
 {
@@ -28,6 +29,9 @@ namespace XamMusic.iOS
 
             // FFImageLoading
             CachedImageRenderer.Init();
+
+            // FlowListView
+            FlowListView.Init();
 
             return base.FinishedLaunching(app, options);
         }

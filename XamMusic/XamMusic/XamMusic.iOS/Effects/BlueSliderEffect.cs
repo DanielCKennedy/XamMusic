@@ -22,7 +22,7 @@ namespace XamMusic.iOS.Effects
             var slider = (UISlider)Control;
             slider.ThumbTintColor = UIColor.FromRGB(34, 135, 202);
             slider.MinimumTrackTintColor = UIColor.FromRGB(34, 135, 202);
-            slider.MaximumTrackTintColor = UIColor.FromRGB(34, 135, 202);
+            //slider.MaximumTrackTintColor = UIColor.FromRGB(34, 135, 202);
         }
 
         protected override void OnDetached()

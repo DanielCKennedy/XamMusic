@@ -35,5 +35,12 @@ namespace XamMusic.Views
             var item = MenuViewModel.Instance.PlaylistItems.Where(pi => pi.Playlist.Id == ((Playlist)((Grid)sender).BindingContext).Id).FirstOrDefault();
             _root.UpdateSelected(item);
         }
+
+        // Because the Grid TapGesture wasn't registering on iOS
+        private void TapGestureRecognizer_Tapped1(object sender, EventArgs e)
+        {
+            var item = MenuViewModel.Instance.PlaylistItems.Where(pi => pi.Playlist.Id == ((Playlist)((ArtworkImage)sender).BindingContext).Id).FirstOrDefault();
+            _root.UpdateSelected(item);
+        }
     }
 }

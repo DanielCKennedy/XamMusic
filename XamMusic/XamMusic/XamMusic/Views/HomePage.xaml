@@ -19,43 +19,51 @@
 
             <!--<ScrollView Grid.Row="0">
                 <StackLayout Orientation="Vertical">-->
-                    
-                    <dlcontrols:FlowListView Grid.Row="0" x:Name="PlaylistGridView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FlowItemsSource="{Binding Playlists}" HasUnevenRows="True" RowHeight="210" FlowColumnMinWidth="160">
-                        <dlcontrols:FlowListView.Header>
-                            <Label Text="Recent Playlists:" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Medium" FontAttributes="Bold" TextColor="LightGray" Margin="10, 5"/>
-                        </dlcontrols:FlowListView.Header>
-                        <dlcontrols:FlowListView.FlowColumnTemplate>
-                            <DataTemplate>
-                                <Grid BackgroundColor="Transparent">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="5" />
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="5" />
-                                    </Grid.ColumnDefinitions>
-                                    <Grid.RowDefinitions>
-                                        <RowDefinition Height="5" />
-                                        <RowDefinition Height="150" />
-                                        <RowDefinition Height="50" />
-                                        <RowDefinition Height="5" />
-                                    </Grid.RowDefinitions>
-                                    <Grid.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
-                                    </Grid.GestureRecognizers>
-                                    <BoxView BackgroundColor="Black" Grid.Row="1" Grid.Column="1" HeightRequest="150" WidthRequest="150" />
-                                    <controls:ArtworkImage Grid.Row="1" Grid.Column="1" HeightRequest="150" WidthRequest="150" Artwork="{Binding Artwork}" />
-                                    <Label Text="{Binding Title}" Grid.Row="2" Grid.Column="1" TextColor="White" HorizontalOptions="Start" FontSize="Medium"/>
-                                </Grid>
-                            </DataTemplate>
-                        </dlcontrols:FlowListView.FlowColumnTemplate>
-                    </dlcontrols:FlowListView>
-                <!--</StackLayout>
+
+            <dlcontrols:FlowListView Grid.Row="0" x:Name="PlaylistGridView" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" FlowItemsSource="{Binding Playlists}" HasUnevenRows="True" RowHeight="210" FlowColumnMinWidth="160" BackgroundColor="Transparent">
+                <dlcontrols:FlowListView.Header>
+                    <Label Text="Playlists:" VerticalOptions="Start" HorizontalOptions="Start" FontSize="Medium" FontAttributes="Bold" TextColor="LightGray" Margin="10, 5"/>
+                </dlcontrols:FlowListView.Header>
+                <dlcontrols:FlowListView.FlowColumnTemplate>
+                    <DataTemplate>
+                        <Grid BackgroundColor="Transparent">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="5" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="5" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="5" />
+                                <RowDefinition Height="150" />
+                                <RowDefinition Height="50" />
+                                <RowDefinition Height="5" />
+                            </Grid.RowDefinitions>
+                            <Grid.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                            </Grid.GestureRecognizers>
+                            <BoxView BackgroundColor="Black" Grid.Row="1" Grid.Column="1" HeightRequest="150" WidthRequest="150" />
+                            <controls:ArtworkImage Grid.Row="1" Grid.Column="1" HeightRequest="150" WidthRequest="150" Artwork="{Binding Artwork}">
+                                <controls:ArtworkImage.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped1" />
+                                </controls:ArtworkImage.GestureRecognizers>
+                            </controls:ArtworkImage>
+                            <Label Text="{Binding Title}" Grid.Row="2" Grid.Column="1" TextColor="White" HorizontalOptions="Start" FontSize="Medium"/>
+                        </Grid>
+                    </DataTemplate>
+                </dlcontrols:FlowListView.FlowColumnTemplate>
+            </dlcontrols:FlowListView>
+            <!--</StackLayout>
             </ScrollView>-->
 
             <ActivityIndicator Grid.Row="0" VerticalOptions="Center" HorizontalOptions="Center" Color="#2287CA" IsRunning="True" IsVisible="{Binding IsLoading}" />
 
 
 
-            <controls:MusicBarControl Grid.Row="1" x:Name="MusicBarController" HeightRequest="65" VerticalOptions="End" />
+            <controls:MusicBarControl Grid.Row="1" x:Name="MusicBarController" VerticalOptions="End" >
+                <controls:MusicBarControl.HeightRequest>
+                    <OnPlatform x:TypeArguments="x:Double" Android="65" iOS="50" />
+                </controls:MusicBarControl.HeightRequest>
+            </controls:MusicBarControl>
             <!--IsVisible="{Binding HasSongs, Source={x:Static vm:MusicStateViewModel.Instance}}"/>-->
         </Grid>
     </ContentPage.Content>

@@ -192,12 +192,6 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <BundleResource Include="Resources\play.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\pause.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BundleResource Include="Resources\pause_w.png" />
   </ItemGroup>
   <ItemGroup>
@@ -205,9 +199,6 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\add_button_t.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\close_b.png" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\next.png" />

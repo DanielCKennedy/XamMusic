@@ -18,7 +18,8 @@ namespace XamMusic.Views
         {
             Detail = new NavigationPage(new HomePage(this))
             {
-                BarBackgroundColor = Color.FromHex("#16171D")
+                BarBackgroundColor = Color.FromHex("#16171D"),
+                BarTextColor = Color.White
             };
             InitializeComponent();
 
@@ -33,7 +34,8 @@ namespace XamMusic.Views
                         PlaylistViewModel.Instance = null;
                         Detail = new NavigationPage(new HomePage(this))
                         {
-                            BarBackgroundColor = Color.FromHex("#16171D")
+                            BarBackgroundColor = Color.FromHex("#16171D"),
+                            BarTextColor = Color.White
                         };
                     }
                     else
@@ -41,7 +43,8 @@ namespace XamMusic.Views
                         PlaylistPage page = new PlaylistPage(item);
                         Detail = new NavigationPage(page)
                         {
-                            BarBackgroundColor = Color.FromHex("#16171D")
+                            BarBackgroundColor = Color.FromHex("#16171D"),
+                            BarTextColor = Color.White
                         };
                     }
                     
