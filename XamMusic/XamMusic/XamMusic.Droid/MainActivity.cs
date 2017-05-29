@@ -15,7 +15,7 @@ using Android.Graphics.Drawables;
 
 namespace XamMusic.Droid
 {
-    [Activity(Label = "XamMusic", Icon = "@drawable/icon", Theme = "@style/MainTheme", MainLauncher = true, LaunchMode = LaunchMode.SingleInstance, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
+    [Activity(Label = "Xam Music", Icon = "@drawable/icon", Theme = "@style/MainTheme", LaunchMode = LaunchMode.SingleInstance, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity, IJavaObject
     {
         public static MainActivity Instance;
@@ -32,25 +32,29 @@ namespace XamMusic.Droid
             ToolbarResource = Resource.Layout.Toolbar;
 
             base.OnCreate(bundle);
-            
+
             // Set Status Bar Color
             Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
             Window.SetStatusBarColor(Color.Black);
 
-            // FFImageLoading
-            CachedImageRenderer.Init();
+            //// FFImageLoading
+            //CachedImageRenderer.Init();
 
-            // AudioService setup
+            //// AudioService setup
             Instance = this;
-            AudioServiceIntent = new Intent(Droid.Audio.AudioService.ActionStart);
-            ComponentName name = StartService(AudioServiceIntent);
-            _connection = new AudioServiceConnection(this);
-            bool binded = BindService(AudioServiceIntent, _connection, Bind.AutoCreate);
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                AudioServiceIntent = new Intent(Droid.Audio.AudioService.ActionStart);
+                ComponentName name = StartService(AudioServiceIntent);
+                _connection = new AudioServiceConnection(this);
+                bool binded = BindService(AudioServiceIntent, _connection, Bind.AutoCreate);
+            });
+            
 
-            global::Xamarin.Forms.Forms.Init(this, bundle);
+            //global::Xamarin.Forms.Forms.Init(this, bundle);
 
-            // FlowListView
-            FlowListView.Init();
+            //// FlowListView
+            //FlowListView.Init();
 
             LoadApplication(new App());            
         }

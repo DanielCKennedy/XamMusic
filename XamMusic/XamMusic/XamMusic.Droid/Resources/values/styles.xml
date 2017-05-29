@@ -7,6 +7,7 @@
     <item name="android:colorFocusedHighlight">@color/ListViewSelected</item>
     <item name="android:colorActivatedHighlight">@color/ListViewSelected</item>
     <item name="android:activatedBackgroundIndicator">@color/ListViewSelected</item>
+    <item name="android:windowBackground">@color/SpashColor</item>
   </style>
   <!-- Base theme applied no matter what API -->
   <style name="MainTheme.Base" parent="Theme.AppCompat.Light.DarkActionBar">
@@ -32,7 +33,20 @@
   <style name="AppCompatDialogStyle" parent="Theme.AppCompat.Light.Dialog">
     <item name="colorAccent">#FF4081</item>
   </style>
+
+  <style name="Theme.Splash"
+    parent="android:Theme">
+    <item name="android:windowBackground">
+      @drawable/splash_screen
+    </item>
+    <item name="android:windowNoTitle">true</item>
+    <item name="android:windowIsTranslucent">false</item>
+    <item name="android:windowIsFloating">false</item>
+    <item name="android:backgroundDimEnabled">false</item>
+  </style>
   
   <color name="ListViewSelected">#2f3037</color>
   <color name="ListViewHighlighted">#2f3037</color>
+  <color name="SpashColor1">#16171D</color>
+  <color name="SpashColor">#000000</color>
 </resources>
