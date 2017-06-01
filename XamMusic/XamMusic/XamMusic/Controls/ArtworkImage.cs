@@ -44,7 +44,7 @@ namespace XamMusic.Controls
                                 height = 400;
                             } 
                             
-                            System.IO.Stream stream = ((MPMediaItemArtwork)Artwork).ImageWithSize(new CoreGraphics.CGSize(WidthRequest, HeightRequest)).AsPNG().AsStream();
+                            System.IO.Stream stream = ((MPMediaItemArtwork)Artwork).ImageWithSize(new CoreGraphics.CGSize(width, height)).AsPNG().AsStream();
                             Source = ImageSource.FromStream(() => stream);
                         }
                         else if (Device.RuntimePlatform == Device.Android)
@@ -55,10 +55,6 @@ namespace XamMusic.Controls
                     else
                     {
                         System.Diagnostics.Debug.WriteLine("Null");
-                        //if (Device.OS == TargetPlatform.iOS)
-                        //{
-                        //    Source = ImageSource.FromResource
-                        //}
                         Source = null;
                     }
                     System.Diagnostics.Debug.WriteLine("Artwork Finished");
